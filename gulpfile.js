@@ -4,6 +4,9 @@ let react = require('gulp-react');
 let babel = require('gulp-babel');
 let livereload = require('gulp-livereload');
 let gutil = require('gulp-util');
+//let less = require('gulp-less');
+let path = require('path');
+let cached =require("gulp-cached");
 function get_babel_params() {
     return {
         //        compact: false,
@@ -45,13 +48,31 @@ gulp.task('mv-dist', function () {
         .pipe(livereload());
 });
 gulp.task('default', function () {
-    gulp.start(["js", "mv-dist"]);
+    gulp.start(["js","less", "mv-dist"]);
 });
 gulp.task('reload', function () {
     gulp.src("").pipe(livereload());
 });
+gulp.task('less', function () {
+    let less = require('gulp-less');
+    var e = less({
+//        paths: [path.join(__dirname, 'less', 'includes')]
+    });
+//    e.on('error', function (ee) {
+//        gutil.log(ee);
+//        e.end();
+//    });
+
+
+    return gulp.src('less/**/*.less')
+        .pipe(e)
+        .pipe(cached("less"))
+        .pipe(gulp.dest('dist/css'))
+        .pipe(livereload());
+});
 //gulp.watch('less/**/*.less', ['less']);
 livereload.listen();
+gulp.watch('less/**/*.less', ['less']);
 gulp.watch('js/**/*.js', ['js']);
 gulp.watch('jsx/**/*.jsx', ['js']);
 gulp.watch('libs/**/*.*', ['mv-dist']);
