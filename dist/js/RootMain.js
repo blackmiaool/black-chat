@@ -13,7 +13,7 @@ define("RootMain", ['Tabs', 'Title', 'Menus', 'Chat', 'Input', 'Info', 'LeftPane
                     type: "setHeadState",
                     data: "online"
                 });
-                socket.send('I am the client and I\'m listening!');
+                //                socket.send("")
                 socket.onmessage = function (event) {
                     console.log('Client received a message', event);
                     console.log(message);

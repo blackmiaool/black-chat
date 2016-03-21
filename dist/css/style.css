@@ -1,0 +1,104 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+* {
+  box-sizing: border-box;
+  font-family: punctuation, "PingFangSC-Regular", "Microsoft Yahei", "sans-serif";
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+.clickable {
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.unselectable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+button {
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+.root-header {
+  color: white;
+  height: 25px;
+  background-color: #2d91cf;
+  padding-left: 10px;
+  font-size: 15px;
+  line-height: 25px;
+  vertical-align: middle;
+}
+.root-main-area {
+  position: absolute;
+  top: 25px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.root-main-area > .left {
+  position: absolute;
+  left: 0;
+  width: 300px;
+  top: 0;
+  bottom: 0;
+}
+.root-main-area > .right {
+  position: absolute;
+  right: 0;
+  left: 300px;
+  top: 0;
+  bottom: 0;
+}
+.Tools-area {
+  position: absolute;
+  background-color: #e3edf2;
+  bottom: 150px;
+  left: 0;
+  right: 0;
+  height: 25px;
+}
+.Input-area {
+  height: 150px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.Input-area .input {
+  height: 100%;
+  width: 100%;
+  border: 1px #e3edf2 solid;
+  resize: none;
+}
+.Input-area .send {
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+  background: #2d91cf;
+  color: white;
+  border: navajowhite;
+  padding: 5px 10px;
+  font-size: 14px;
+  line-height: 100%;
+}
+.Input-area .send .underline {
+  text-decoration: underline;
+}
+.Chat-area {
+  border-left: 1px #e3edf2 solid;
+  position: absolute;
+  right: 0;
+  bottom: 175px;
+  top: 0;
+  left: 0;
+  overflow: auto;
+}

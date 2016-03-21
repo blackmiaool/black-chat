@@ -18,7 +18,7 @@ define("Input", ["common"], function (common) {
             store.dispatch({ type: "sendMessage", data: this.state.text });
         },
         render: function render() {
-            return React.createElement("div", { className: "Input-area" }, React.createElement("textarea", { className: "input", name: "", cols: "30", rows: "10", value: this.state.text, onChange: this.update }), React.createElement("button", { className: "send", onClick: this.submit }, "提交"));
+            return React.createElement("div", { className: "Input-area" }, React.createElement("textarea", { className: "input", name: "", cols: "30", rows: "10", value: this.state.text, onChange: this.update }), React.createElement("div", { className: "send clickable unselectable", onClick: this.submit }, "发送(", React.createElement("span", { className: "underline" }, "s"), ")"));
         }
     });
     return Input;

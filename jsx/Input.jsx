@@ -19,7 +19,7 @@ define("Input", ["common"], function(common) {
             return (
                 <div className="Input-area">
                     <textarea className="input" name="" cols="30" rows="10" value={this.state.text} onChange={this.update}></textarea>
-                    <button className="send" onClick={this.submit}>提交</button>
+                    <div className="send clickable unselectable" onClick={this.submit}>发送&#40;<span className="underline">s</span>&#41;</div>
                 </div>
             );
         }
