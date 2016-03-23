@@ -1,12 +1,31 @@
 define("Chat", ["common"], function(common) {
+    let $$;
+     
+    function checkScroll(){
+        
+    }
     let Chat = React.createClass({
+        getInitialState: function() {
+            
+            return {};
+        },
+        componentDidMount:function(){
+            this.$dom=$(ReactDOM.findDOMNode(this));
+            $$=this.$dom.find.bind(this.$dom);
 
+        },
+        handleMessage:function(messages){
+            console.log("lkjkl")
+            return messages.map((v,i)=>{
+                return <div key={i} className="message">{v}</div>                        
+            });
+        },
         render: function() {
             return (
                 <div className="Chat-area">
-                {this.props.message.map((v,i)=>{
-                        return <p key={i}>{v}</p>                        
-                    })}
+                <div className="message-wrap">
+                    {this.handleMessage(this.props.message)}
+                </div>                
                 </div>
             );
         }

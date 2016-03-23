@@ -12,8 +12,8 @@ define("RootMain", ['Tabs', 'Title', 'Menus', 'Chat', 'Input', 'Info', 'LeftPane
                 })
 //                socket.send("")
                 socket.onmessage = (event)=> {
-                    console.log('Client received a message', event);
-                    console.log(message)
+//                    console.log('Client received a message', event);
+//                    console.log(message)
                     if(!event.data)
                         return;
                     message.push(event.data)

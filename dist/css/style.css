@@ -1,3 +1,14 @@
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  border-top: 4px solid;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+  vertical-align: middle;
+  margin: 0px;
+}
 html,
 body {
   margin: 0;
@@ -78,20 +89,82 @@ button {
   width: 100%;
   border: 1px #e3edf2 solid;
   resize: none;
+  padding-bottom: 40px;
 }
-.Input-area .send {
+.Input-area .send-wrap {
   position: absolute;
-  right: 7px;
-  bottom: 7px;
-  background: #2d91cf;
+  right: 10px;
+  bottom: 10px;
+}
+.Input-area .send-wrap .common {
+  background-color: #2d91cf;
+  transition: background-color 150ms linear;
+}
+.Input-area .send-wrap .common:hover {
+  background-color: rgba(45, 145, 207, 0.7);
+}
+.Input-area .send-wrap .common:active {
+  transition-duration: 0ms;
+  background-color: #196993;
+}
+.Input-area .send-wrap .send {
+  background-color: #2d91cf;
+  transition: background-color 150ms linear;
+  float: left;
+  outline: none;
   color: white;
   border: navajowhite;
-  padding: 5px 10px;
+  padding: 5px 7px;
   font-size: 14px;
-  line-height: 100%;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  margin-right: 20px;
+  padding-right: 7px;
 }
-.Input-area .send .underline {
+.Input-area .send-wrap .send:hover {
+  background-color: rgba(45, 145, 207, 0.7);
+}
+.Input-area .send-wrap .send:active {
+  transition-duration: 0ms;
+  background-color: #196993;
+}
+.Input-area .send-wrap .send .underline {
   text-decoration: underline;
+}
+.Input-area .send-wrap .send span {
+  vertical-align: middle;
+  display: inline-block;
+}
+.Input-area .send-wrap .menu-head {
+  background-color: #2d91cf;
+  transition: background-color 150ms linear;
+  line-height: 28px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  width: 20px;
+  display: inline-block;
+  border-left: 1px rgba(255, 255, 255, 0.4) solid;
+  float: right;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  font-size: 0px;
+  text-align: center;
+}
+.Input-area .send-wrap .menu-head:hover {
+  background-color: rgba(45, 145, 207, 0.7);
+}
+.Input-area .send-wrap .menu-head:active {
+  transition-duration: 0ms;
+  background-color: #196993;
+}
+.Input-area .send-wrap .menu-head .nothing {
+  width: 0px;
+}
+.Input-area .send-wrap .menu-head .caret {
+  border-top-color: white;
+  margin-right: 1px;
 }
 .Chat-area {
   border-left: 1px #e3edf2 solid;
