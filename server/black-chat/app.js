@@ -21,9 +21,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use("/",express.static(path.join(__dirname, '../../')));
+
+app.use("/",express.static(path.join(__dirname, '../../fe/')));
+app.get('/*', function(req, res) {
+    console.log(12234234234)
+    res.sendfile(path.join(__dirname, '../../fe/index.html')); // load our public/index.html file
+});
+app.post('/pipe/profile',function(req, res){
+    
+})
+//app.use("/chat/\w*",express.static(path.join(__dirname, '../../fe/')));
 //app.use('/', routes);
 app.use('/users', users);
+ 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

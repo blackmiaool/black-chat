@@ -1,0 +1,177 @@
+.clickable {
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.unselectable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+button {
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  border-top: 4px solid;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+  vertical-align: middle;
+  margin: 0px;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+* {
+  box-sizing: border-box;
+  font-family: punctuation, "PingFangSC-Regular", "Microsoft Yahei", "sans-serif";
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+.Chat-area {
+  border-left: 1px #e3edf2 solid;
+  position: absolute;
+  right: 0;
+  bottom: 175px;
+  top: 0;
+  left: 0;
+  overflow: auto;
+}
+.Input-area {
+  height: 150px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.Input-area .input {
+  height: 100%;
+  width: 100%;
+  border: 1px #e3edf2 solid;
+  resize: none;
+  padding-bottom: 40px;
+}
+.Input-area .send-wrap {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+.Input-area .send-wrap .common {
+  background-color: #2d91cf;
+  transition: background-color 150ms linear;
+}
+.Input-area .send-wrap .common:hover {
+  background-color: rgba(45, 145, 207, 0.7);
+}
+.Input-area .send-wrap .common:active {
+  transition-duration: 0ms;
+  background-color: #196993;
+}
+.Input-area .send-wrap .send {
+  background-color: #2d91cf;
+  transition: background-color 150ms linear;
+  float: left;
+  outline: none;
+  color: white;
+  border: navajowhite;
+  padding: 5px 7px;
+  font-size: 14px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  margin-right: 20px;
+  padding-right: 7px;
+}
+.Input-area .send-wrap .send:hover {
+  background-color: rgba(45, 145, 207, 0.7);
+}
+.Input-area .send-wrap .send:active {
+  transition-duration: 0ms;
+  background-color: #196993;
+}
+.Input-area .send-wrap .send .underline {
+  text-decoration: underline;
+}
+.Input-area .send-wrap .send span {
+  vertical-align: middle;
+  display: inline-block;
+}
+.Input-area .send-wrap .menu-head {
+  background-color: #2d91cf;
+  transition: background-color 150ms linear;
+  line-height: 28px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  width: 20px;
+  display: inline-block;
+  border-left: 1px rgba(255, 255, 255, 0.4) solid;
+  float: right;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  font-size: 0px;
+  text-align: center;
+}
+.Input-area .send-wrap .menu-head:hover {
+  background-color: rgba(45, 145, 207, 0.7);
+}
+.Input-area .send-wrap .menu-head:active {
+  transition-duration: 0ms;
+  background-color: #196993;
+}
+.Input-area .send-wrap .menu-head .nothing {
+  width: 0px;
+}
+.Input-area .send-wrap .menu-head .caret {
+  border-top-color: white;
+  margin-right: 1px;
+}
+.root-header {
+  color: white;
+  height: 25px;
+  background-color: #2d91cf;
+  padding-left: 10px;
+  font-size: 15px;
+  line-height: 25px;
+  vertical-align: middle;
+}
+.root-main-area {
+  position: absolute;
+  top: 25px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.root-main-area > .left {
+  position: absolute;
+  left: 0;
+  width: 300px;
+  top: 0;
+  bottom: 0;
+}
+.root-main-area > .right {
+  position: absolute;
+  right: 0;
+  left: 300px;
+  top: 0;
+  bottom: 0;
+}
+.Tools-area {
+  position: absolute;
+  background-color: #e3edf2;
+  bottom: 150px;
+  left: 0;
+  right: 0;
+  height: 25px;
+}
