@@ -1,5 +1,8 @@
-define( ['Tabs/', 'Title/', 'Menus/', 'Chat/', 'Input/', 'Info/', 'LeftPanel/','Tools/'], function(Tabs, Title, Menus, Chat, Input, Info, LeftPanel,Tools) {
-    let RootMain = React.createClass({
+define( ['Tabs/', 'Title/', 'Menus/', 'ChatMessage/', 'Input/', 'Info/', 'LeftPanel/','Tools/'], function(Tabs, Title, Menus, ChatMessage, Input, Info, LeftPanel,Tools) {
+    let constructor={
+        getChildContext:function(){
+            return {col:"3:"};
+        },
         getInitialState: function() {
 
             var socket = new WebSocket(`ws://${location.host}/pipe/submit`);
@@ -54,7 +57,7 @@ define( ['Tabs/', 'Title/', 'Menus/', 'Chat/', 'Input/', 'Info/', 'LeftPanel/','
                         <Tabs/>
                         <Title/>                                       
                         <Menus/>
-                        <Chat message={this.state.message}/>
+                        <ChatMessage message={this.state.message}/>
                         <Tools/>
                         <Input store={this.state.store}/>
                     </div>                    
@@ -62,6 +65,18 @@ define( ['Tabs/', 'Title/', 'Menus/', 'Chat/', 'Input/', 'Info/', 'LeftPanel/','
                 </div>
             );
         }
-    });
+    };
+    if(constructor.getChildContext){
+        let type={};
+        let context=constructor.getChildContext();
+        console.log(context)
+        constructor.childContextTypes={};
+        for(let i in context){
+            constructor.childContextTypes[i]=React.PropTypes.any;
+        }
+        
+    }
+    console.log(constructor)
+    let RootMain = React.createClass(constructor);
     return RootMain;
 })

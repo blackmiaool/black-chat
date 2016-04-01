@@ -1,33 +1,36 @@
-define(["common"], function(common) {
-    let $$;
-     
-    function checkScroll(){
-        
-    }
-    let Chat = React.createClass({
-        getInitialState: function() {
-            
-            return {};
+define(["common","RootHeader/","RootMain/"],function(common,RootHeader,RootMain){
+    let Root=React.createClass({
+        getInitialState:function(){
+            let rootStore=(state={},action)=>{                
+                switch(action.type){
+                    case "setHeadState":                        
+                        state.headState=action.data;
+                        break;
+                }
+                return state;
+            }
+            let store = Redux.createStore(rootStore);
+//            console.log(store); 
+            store.subscribe(()=>{
+                this.setState({
+                    headState:store.getState().headState
+                });
+                
+            })
+            return {store:store,headState:"离线"};
         },
-        componentDidMount:function(){
-            this.$dom=$(ReactDOM.findDOMNode(this));
-            $$=this.$dom.find.bind(this.$dom);
-
-        },
-        handleMessage:function(messages){
-            return messages.map((v,i)=>{
-                return <div key={i} className="message">{v}</div>                        
-            });
-        },
-        render: function() {
+        render:function(){
             return (
-                <div className="Chat-area">
-                <div className="message-wrap">
-                    {this.handleMessage(this.props.message)}
-                </div>                
-                </div>
+                <div>
+                    <RootHeader store={this.state.store} headState={this.state.headState}/>
+                    <RootMain store={this.state.store}/>
+                </div>            
             );
         }
     });
-    return Chat;
+    ReactDOM.render(
+      <Root/>, 
+      $("#wrap")[0]
+    );
 })
+

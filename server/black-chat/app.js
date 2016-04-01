@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use("/",express.static(path.join(__dirname, '../../fe/')));
-app.get('/*', function(req, res) {
+app.get(/^\/\w+\/?$/, function(req, res) {
     console.log(12234234234)
     res.sendfile(path.join(__dirname, '../../fe/index.html')); // load our public/index.html file
 });

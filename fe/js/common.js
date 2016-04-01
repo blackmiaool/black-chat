@@ -30,9 +30,8 @@ define("common", function () {
             segments: a.pathname.replace(/^\//, '').split('/')
         };
     }
-    let args=parseURL(window.location.href);
-    console.log(args);
-    
+    let args=parseURL(window.location.href);   
+    args.page=args.segments[0];
     let initPage = () => {
         
     };

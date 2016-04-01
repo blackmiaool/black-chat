@@ -7,6 +7,7 @@ let gutil = require('gulp-util');
 //let less = require('gulp-less');
 let path = require('path');
 let cached =require("gulp-cached");
+let config=require("./config.js");
 function get_babel_params() {
     return {
         //        compact: false,
@@ -58,12 +59,12 @@ gulp.task('less', function () {
     var e = less({
 //        paths: [path.join(__dirname, 'less', 'includes')]
     });
-//    e.on('error', function (ee) {
-//        gutil.log(ee);
-//        e.end();
-//    });
+    e.on('error', function (ee) {
+        gutil.log(ee);
+        this.emit('end');
+    });
 
-
+ 
     return gulp.src('less/style.less')
         .pipe(e)
         .pipe(cached("less"))
@@ -72,9 +73,10 @@ gulp.task('less', function () {
 });
 //gulp.watch('less/**/*.less', ['less']);
 livereload.listen();
+gulp.watch('less/**/*.less', ['less']);
 gulp.watch('component/**/*.less', ['less']);
 gulp.watch('js/**/*.js', ['js']);
-gulp.watch('component/**/*.jsx', ['js']);
+gulp.watch('component/**/*.jsx', ['jsx']);
 gulp.watch('libs/**/*.*', ['mv-dist']);
 gulp.watch('index.html', ['reload']);
 gulp.watch('html/**/*.html', ['html']);

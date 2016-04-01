@@ -1,10 +1,10 @@
 define(function(){
-    let Info=React.createClass({
+    let component=React.createClass({
         render:function(){
             return (
                 <div></div>
             );
         }
     });
-    return Info;
+    return component;
 })
