@@ -6,18 +6,19 @@ let livereload = require('gulp-livereload');
 let gutil = require('gulp-util');
 //let less = require('gulp-less');
 let path = require('path');
-let cached =require("gulp-cached");
-let config=require("./config.js");
+let cached = require("gulp-cached");
+let config = require("./config.js");
 let headerfooter = require('gulp-headerfooter');
+
 function get_babel_params() {
     return {
         //        compact: false,
-        presets: ['es2015','react'],
-//        plugins: ["transform-es2015-modules-amd"]
+        presets: ['es2015', 'react'],
+        //        plugins: ["transform-es2015-modules-amd"]
         //        plugins: ["transform-runtime"],
         //        optional: ['runtime'],
-//        harmony: false,
-//        es6module: true
+        //        harmony: false,
+        //        es6module: true
     }
 }
 
@@ -30,7 +31,7 @@ gulp.task('jsx', function () {
     return gulp.src('component/**/*.jsx')
         .pipe(cached("jsx"))
         .pipe(config.componentsHandle())
-//        .pipe(react())
+        //        .pipe(react())
         .pipe(babel_pipe)
         .pipe(gulp.dest('dist/js'))
         .pipe(livereload());
@@ -52,35 +53,32 @@ gulp.task('mv-dist', function () {
         .pipe(livereload());
 });
 gulp.task('default', function () {
-    gulp.start(["js","less", "mv-dist"]);
+    gulp.start(["build", "js", "less", "mv-dist"]);
 });
 gulp.task('reload', function () {
     gulp.src("").pipe(livereload());
 });
-gulp.task('less',['buildLess'], function () {
+gulp.task('less', function () {
     let less = require('gulp-less');
     var e = less({
-//        paths: [path.join(__dirname, 'less', 'includes')]
+        //        paths: [path.join(__dirname, 'less', 'includes')]
     });
     e.on('error', function (ee) {
         gutil.log(ee);
         this.emit('end');
     });
 
- 
+
     return gulp.src('less/page/*.less')
         .pipe(e)
         .pipe(cached("less"))
         .pipe(gulp.dest('dist/css'))
         .pipe(livereload());
 });
-gulp.task('buildLess', function () {
+
+gulp.task('build', function () {
+    config.generateComponent()
     config.generateLess()
-//    return gulp.src('less/style.less')
-//        .pipe(e)
-//        .pipe(cached("less"))
-//        .pipe(gulp.dest('dist/css'))
-//        .pipe(livereload());
 });
 //gulp.watch('less/**/*.less', ['less']);
 livereload.listen();

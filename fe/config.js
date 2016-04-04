@@ -4,7 +4,7 @@ let gutil = require('gulp-util');
 let PluginError = gutil.PluginError;
 let fs = require("fs")
 const PLUGIN_NAME = 'blackmiaool manage tool';
-
+let mkdirp = require('mkdirp');
 
 
 let pageConfig = {
@@ -19,6 +19,7 @@ let pageConfig = {
             Info: 1,
             LeftPanel: 1,
             Tools: 1,
+            test: 1
         },
     },
     login: {
@@ -30,13 +31,29 @@ let pageConfig = {
         CommonHeader: 1
     }
 }
+var tmpls = {
+    componentJs: {
+        name: "component.jsx"
+    },
+    componentLess: {
+        name: "component.less"
+    }
+};
 
-function tmpls_generate(file, data) {
-    var src = tmpls[file];
+(function tmplsInit() {
+    let tmplFolder = "tmpl/";
+    for (let i in tmpls) {
+        let v = tmpls[i];
+        tmpls[i].content = fs.readFileSync(tmplFolder + v.name).toString();
+    }
+})();
 
-    var pat = new RegExp(/\{\{([\s\S]+?)\}\}/g);
-    var target = src.replace(pat, function (outter_text, inner_text) {
-        return data[inner_text];
+function tmplsGet(name, data) {
+    var src = tmpls[name].content;
+
+    var pattern = new RegExp(/\{\{([\s\S]+?)\}\}/g);
+    var target = src.replace(pattern, function (outterText, innerText) {
+        return data[innerText];
     })
     return target;
 }
@@ -89,8 +106,6 @@ function componentsHandle(target_functions) {
             const fileName = paths[paths.length - 1];
             const isRoot = page === "component";
             let deps = getDep(!isRoot && page, modName);
-            if (deps.constructor == Array) {
-            }
             let head = "";
             let foot;
             let modHead = "/dist/js";
@@ -126,22 +141,42 @@ function componentsHandle(target_functions) {
     });
 }
 
-function generateLess() {
-    function getDeps(config) {
-        let deps = [];
-        for (let i in config) {
+function getDeps(config, type) {
+    let deps = [];
+    for (let i in config) {
+        if (type === "solid") {
+            if (isObj(config[i])) {
+                deps.push(i);
+                deps = deps.concat(getDeps(config[i], type))
+            } else if (config[i]) {
+                deps.push(i);
+            }
+        } else {
             deps.push(i);
             if (isObj(config[i])) {
                 deps = deps.concat(getDeps(config[i]))
             }
-
         }
-        return deps;
     }
-    for (let i in pageConfig) {
+    return deps;
+}
+
+function getAllDeps(config, type) {
+    let ret = {};
+    for (let i in config) {
         let page = i;
-        let deps = getDeps(pageConfig[i]);
-//        console.log(page, deps);
+        let deps = getDeps(config[i], type);
+        ret[i] = deps;
+    }
+    return ret;
+}
+//console.log(getAllDeps(pageConfig,"solid"));
+function generateLess() {
+    let allDeps = getAllDeps(pageConfig);
+    for (let i in allDeps) {
+        let page = i;
+        let deps = allDeps[i];
+        //        console.log(page, deps);
         let lessInfo = `@import "../common.less";
                         @import "../variables.less";\n`;
         deps.forEach(function (name, i) {
@@ -156,11 +191,45 @@ function generateLess() {
         })
         let lessPath = `less/page/${page}.less`
         fs.writeFileSync(lessPath, lessInfo);
-//        console.log(lessInfo);
+        //        console.log(lessInfo);
     }
+}
+const componentDir = "component";
+
+function generateComponent() {
+    let allDeps = getAllDeps(pageConfig, "solid");
+    for (let i in allDeps) {
+        let page = i;
+        let deps = allDeps[i];
+        deps.forEach(function (name, i) {
+            let path = `${componentDir}/${page}`;
+            try {
+                fs.statSync(`${path}/${name}`).isDirectory(); //check if exist
+            } catch (e) {
+                mkdirp.sync(`${path}/${name}`);
+                fs.writeFileSync(`${path}/${name}/${name}.jsx`, tmplsGet("componentJs", {
+                    page, name
+                }));
+                fs.writeFileSync(`${path}/${name}/${name}.less`, tmplsGet("componentLess", {
+                    page, name
+                }));
+                return false;
+            }
+        })
+    }
+    //    try {
+    //        fs.statSync(widget_folder + get_widget_id()).isDirectory();
+    //    } catch (e) {
+    //        console.log("Widget " + get_widget_id() + " is not found (from pageConfig.js). Generate?(Y/N)");
+    //        stop = true;
+    //        not_found = true;
+    //        generate_target = "widget";
+    //        return false;
+    //    }
 }
 // Exporting the plugin main function
 module.exports = {
-    componentsHandle: componentsHandle,
-    generateLess
+    componentsHandle,
+    generateLess,
+    generateComponent
 };
