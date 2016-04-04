@@ -1,4 +1,4 @@
-define(["common","LoginForm/","RegisterForm/","CommonHeader/"],function(common,LoginForm,RegisterForm,CommonHeader){
+
     let Root=React.createClass({
         getInitialState:function(){
             let rootStore=(state={},action)=>{                
@@ -37,5 +37,5 @@ define(["common","LoginForm/","RegisterForm/","CommonHeader/"],function(common,L
       <Root/>, 
       $("#wrap")[0]
     );
-})
+
 

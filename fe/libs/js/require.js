@@ -1656,6 +1656,7 @@ var requirejs, require, define;
                     //Join the path parts together, then figure out if baseUrl is needed.
                     url = syms.join('/');
                     url += (ext || (/^data\:|\?/.test(url) || skipExt ? '' : '.js'));
+                    
                     url = (url.charAt(0) === '/' || url.match(/^[\w\+\.\-]+:/) ? '' : config.baseUrl) + url;
                 }
 
@@ -2045,7 +2046,7 @@ var requirejs, require, define;
             deps = null;
         }
 //        
-        if(deps){
+        if(deps&&false){
             deps.forEach(function(v,i){//component module end up with "/"
                 var component=v.match(/(\S+)\/$/);
                 if(component){

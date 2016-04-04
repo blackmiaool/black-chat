@@ -8,6 +8,7 @@ let gutil = require('gulp-util');
 let path = require('path');
 let cached =require("gulp-cached");
 let config=require("./config.js");
+let headerfooter = require('gulp-headerfooter');
 function get_babel_params() {
     return {
         //        compact: false,
@@ -19,15 +20,17 @@ function get_babel_params() {
 //        es6module: true
     }
 }
+
 gulp.task('jsx', function () {
     var babel_pipe = babel(get_babel_params());
     babel_pipe.on('error', function (ee) {
         gutil.log(ee);
         babel_pipe.end();
     });
-    console.log("d")
     return gulp.src('component/**/*.jsx')
-        .pipe(react())
+        .pipe(cached("jsx"))
+        .pipe(config.componentsHandle())
+//        .pipe(react())
         .pipe(babel_pipe)
         .pipe(gulp.dest('dist/js'))
         .pipe(livereload());
@@ -54,7 +57,7 @@ gulp.task('default', function () {
 gulp.task('reload', function () {
     gulp.src("").pipe(livereload());
 });
-gulp.task('less', function () {
+gulp.task('less',['buildLess'], function () {
     let less = require('gulp-less');
     var e = less({
 //        paths: [path.join(__dirname, 'less', 'includes')]
@@ -65,11 +68,19 @@ gulp.task('less', function () {
     });
 
  
-    return gulp.src('less/style.less')
+    return gulp.src('less/page/*.less')
         .pipe(e)
         .pipe(cached("less"))
         .pipe(gulp.dest('dist/css'))
         .pipe(livereload());
+});
+gulp.task('buildLess', function () {
+    config.generateLess()
+//    return gulp.src('less/style.less')
+//        .pipe(e)
+//        .pipe(cached("less"))
+//        .pipe(gulp.dest('dist/css'))
+//        .pipe(livereload());
 });
 //gulp.watch('less/**/*.less', ['less']);
 livereload.listen();

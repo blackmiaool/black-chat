@@ -1,4 +1,4 @@
-define(["common","RootHeader/","RootMain/"],function(common,RootHeader,RootMain){
+
     let Root=React.createClass({
         getInitialState:function(){
             let rootStore=(state={},action)=>{                
@@ -32,5 +32,5 @@ define(["common","RootHeader/","RootMain/"],function(common,RootHeader,RootMain)
       <Root/>, 
       $("#wrap")[0]
     );
-})
+
 
