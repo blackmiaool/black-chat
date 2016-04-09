@@ -1,7 +1,8 @@
-var component={};    
-component=React.createClass({
+let Provider=ReactRedux.Provider;
+let component=React.createClass({
     getInitialState:function(){
-
+        return {
+        };
     },
     render:function(){
         return (

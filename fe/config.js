@@ -24,7 +24,7 @@ let pageConfig = {
     },
     login: {
         "common/CommonHeader": 0,
-        LoginForm: 1,
+        LoginForm: 2,
         RegisterForm: 1,
     },
     common: {
@@ -32,8 +32,11 @@ let pageConfig = {
     }
 }
 var tmpls = {
-    componentJs: {
-        name: "component.jsx"
+    componentJsContainer: {
+        name: "container_component.jsx"
+    },
+    componentJsPresentational: {
+        name: "presentational_component.jsx"
     },
     componentLess: {
         name: "component.less"
@@ -144,17 +147,24 @@ function componentsHandle(target_functions) {
 function getDeps(config, type) {
     let deps = [];
     for (let i in config) {
+        let value=config[i];        
+        let item={name:i,type:value};
+        if(isObj(value)){
+            item.type="obj";
+        }
         if (type === "solid") {
-            if (isObj(config[i])) {
-                deps.push(i);
-                deps = deps.concat(getDeps(config[i], type))
-            } else if (config[i]) {
-                deps.push(i);
+            if (isObj(value)) {
+                deps.push(item);
+                deps = deps.concat(getDeps(value, type))
+            } else if (value) {
+                deps.push(item);
             }
         } else {
-            deps.push(i);
-            if (isObj(config[i])) {
-                deps = deps.concat(getDeps(config[i]))
+            deps.push(item);
+            if (isObj(value)) {
+                deps = deps.concat(getDeps(value))
+            }else{
+                
             }
         }
     }
@@ -177,9 +187,9 @@ function generateLess() {
         let page = i;
         let deps = allDeps[i];
         //        console.log(page, deps);
-        let lessInfo = `@import "../common.less";
-                        @import "../variables.less";\n`;
+        let lessInfo = `@import "common.less";\n@import "variables.less";\n@import "${page}/${page}.less";\n`;
         deps.forEach(function (name, i) {
+            name=name.name;
             let paths = name.split("/");
             let pageName = page;
             let modName = name;
@@ -187,7 +197,7 @@ function generateLess() {
                 pageName = paths[0];
                 modName = paths[1];
             }
-            lessInfo += `@import "@{componentPath}/${pageName}/${modName}/${modName}.less";\n`;
+            lessInfo += `@import "${pageName}/${modName}/${modName}.less";\n`;
         })
         let lessPath = `less/page/${page}.less`
         fs.writeFileSync(lessPath, lessInfo);
@@ -202,12 +212,14 @@ function generateComponent() {
         let page = i;
         let deps = allDeps[i];
         deps.forEach(function (name, i) {
+            let type=name.type;
+            name=name.name;
             let path = `${componentDir}/${page}`;
             try {
                 fs.statSync(`${path}/${name}`).isDirectory(); //check if exist
             } catch (e) {
                 mkdirp.sync(`${path}/${name}`);
-                fs.writeFileSync(`${path}/${name}/${name}.jsx`, tmplsGet("componentJs", {
+                fs.writeFileSync(`${path}/${name}/${name}.jsx`, tmplsGet(type=="obj"||type=="2"?"componentJsContainer":"componentJsPresentational", {
                     page, name
                 }));
                 fs.writeFileSync(`${path}/${name}/${name}.less`, tmplsGet("componentLess", {

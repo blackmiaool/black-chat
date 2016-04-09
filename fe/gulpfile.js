@@ -61,13 +61,13 @@ gulp.task('reload', function () {
 gulp.task('less', function () {
     let less = require('gulp-less');
     var e = less({
-        //        paths: [path.join(__dirname, 'less', 'includes')]
+                paths: [path.join(__dirname, 'less'),path.join(__dirname, 'component')]
     });
     e.on('error', function (ee) {
         gutil.log(ee);
         this.emit('end');
     });
-
+ 
 
     return gulp.src('less/page/*.less')
         .pipe(e)
@@ -88,4 +88,11 @@ gulp.watch('js/**/*.js', ['js']);
 gulp.watch('component/**/*.jsx', ['jsx']);
 gulp.watch('libs/**/*.*', ['mv-dist']);
 gulp.watch('index.html', ['reload']);
-gulp.watch('html/**/*.html', ['html']);
+gulp.watch('html/**/*.html', ['html']); 
+
+
+ 
+
+
+
+

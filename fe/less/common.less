@@ -1,3 +1,10 @@
+@import "bootstrap/forms.less";
+@import "bootstrap/input-groups.less";
+@import "bootstrap/buttons.less";
+@import "bootstrap/button-groups.less";
+@import "bootstrap/variables.less";
+@import "bootstrap/mixins.less";
+
 html,
 body {
     margin: 0;
@@ -45,11 +52,18 @@ input{
     vertical-align: middle;
     margin: 0px;
 }
-.absolute-fill{
+.abs-fill{
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
     margin: auto;
+}
+.trans{    
+    .transition(-webkit-transform 400ms);
+    .transition(-moz-transform 400ms);
+    .transition(-ms-transform 400ms);
+    .transition(-o-transform 400ms);
+    .transition(transform 400ms);
 }

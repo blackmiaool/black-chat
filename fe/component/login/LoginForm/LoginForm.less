@@ -1,14 +1,39 @@
-.component-LoginForm{
-    input{
-        margin-bottom: 20px;
+@import "variables.less";
+@import "common.less";
+.login-LoginForm-component {
+    &[data-mode="signin"] {
+        input[name="invite-code"],
+        input[name="passwd-again"] {
+            .transform(translateX(100px));
+            opacity: 0;
+            height: 0;
+            margin: 0;
+            padding: 0;
+        }
+        input[name="submit"] {
+            .btn-success;
+        }
     }
-    button{
+    &[data-mode="signup"] {}
+    input {
+        //        &:extend(.trans);
+        transition: all 400ms;
+        margin-bottom: 20px;
+        display: block;
+    }
+    button {
         width: 100%;
     }
-    a{
+    a {
         font-size: 14px;
         color: white;
-        margin-top: 5px;   
-        display: inline-block;    
+        margin-top: 5px;
+        display: inline-block;
+    }
+    input[name="submit"] {
+        margin-bottom: 0;
+        .btn;
+        .btn-danger;
+        display: block;
     }
 }

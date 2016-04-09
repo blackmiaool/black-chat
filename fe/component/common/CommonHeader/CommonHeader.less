@@ -1,17 +1,18 @@
-
-.CommonHeader {
+@import "../../../less/variables.less";
+.common-CommonHeader-component.component{  
     height: 70px;
     text-align: center;
     padding: 0 10px;
+    position: relative;
     >.center {
-        &:extend(.absolute-fill);
+        &:extend(.abs-fill);
         display: flex;
         align-items: center;
         position: relative;                
         line-height: 70px;
         height: 100%;
         >.icon {
-//            &:extend(.absolute-fill);
+//            &:extend(.abs-fill);
 //            right: auto; 
             img{
                 display: block;

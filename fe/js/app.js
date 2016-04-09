@@ -14,7 +14,9 @@ define("entry",["common"],function(common){
     if(pages.indexOf(page)=== -1){
         window.location.href=location.origin+"/chat";
     }else{
-        
+        let link=$(`<link rel="stylesheet">`);
+        link.attr("href",`/dist/css/${page}.css`);
+        $(window.document.body).append(link);
         requirejs([page]);
     }
 })  

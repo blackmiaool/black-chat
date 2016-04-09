@@ -1,10 +1,8 @@
+let Provider=ReactRedux.Provider;
 let Root=React.createClass({
     getInitialState:function(){
         let rootStore=(state={},action)=>{                
             switch(action.type){
-                case "setHeadState":                        
-                    state.headState=action.data;
-                    break;
             }
             return state;
         }

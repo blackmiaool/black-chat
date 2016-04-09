@@ -1,5 +1,6 @@
-var component={};    
-component=React.createClass({
+let connect=ReactRedux.connect;
+let Provider=ReactRedux.Provider;
+let component=React.createClass({
     getInitialState:function(){
 
     },

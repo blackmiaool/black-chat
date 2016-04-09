@@ -1,8 +1,12 @@
-
-    let component=React.createClass({
-        render:function(){
-            return (
-                <div className="CommonHeader">
+let Provider=ReactRedux.Provider;
+let component=React.createClass({
+    getInitialState:function(){
+        return {
+        };
+    },
+    render:function(){
+        return (
+            <div className="common-CommonHeader-component component">
                     <div className="center page-max-width">
                         <a className="icon" href="javascript:window.location.origin"><img  src="/icon.png"/></a> 
                         <button className="nav-btn create">Create a room</button>
@@ -14,7 +18,39 @@
                         
                     </div>
                 </div>
-            );
-        }
-    });
-    return component;
+        );
+    },
+//    getDefaultProps:function(){
+//        
+//    },
+//    propTypes:{
+//        
+//    },
+//    mixins:[],    
+//    statics: {
+//        
+//    },
+//    componentWillMount:function(){
+//        
+//    },
+//    componentDidMount:function(){
+//        
+//    },
+//    componentWillReceiveProps:function(nextProps){
+//        
+//    },
+//    shouldComponentUpdate: function(nextProps, nextState) {
+//
+//    },
+//    componentWillUpdate:function(nextProps, nextState){
+//        
+//    },
+//    componentDidUpdate:function(prevProps,prevState){
+//        
+//    },
+//    componentWillUnmount:function(){
+//        
+//    }    
+});
+return component;
+

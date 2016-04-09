@@ -1,12 +1,46 @@
-let LeftPanel=React.createClass({
-    contextTypes: {
-        col: React.PropTypes.any
+let Provider=ReactRedux.Provider;
+let component=React.createClass({
+    getInitialState:function(){
+        return {
+        };
     },
     render:function(){
-        console.log("col",this.context);
         return (
-            <div></div>
+            <div className="chat-LeftPanel-component component">
+            </div>
         );
-    }
+    },
+//    getDefaultProps:function(){
+//        
+//    },
+//    propTypes:{
+//        
+//    },
+//    mixins:[],    
+//    statics: {
+//        
+//    },
+//    componentWillMount:function(){
+//        
+//    },
+//    componentDidMount:function(){
+//        
+//    },
+//    componentWillReceiveProps:function(nextProps){
+//        
+//    },
+//    shouldComponentUpdate: function(nextProps, nextState) {
+//
+//    },
+//    componentWillUpdate:function(nextProps, nextState){
+//        
+//    },
+//    componentDidUpdate:function(prevProps,prevState){
+//        
+//    },
+//    componentWillUnmount:function(){
+//        
+//    }    
 });
-return LeftPanel;
+return component;
+

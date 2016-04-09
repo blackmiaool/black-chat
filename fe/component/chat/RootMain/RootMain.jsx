@@ -1,80 +1,65 @@
-let constructor={
-    getChildContext:function(){
-        return {col:"3:"};
-    },
-    getInitialState: function() {
-
-        var socket = new WebSocket(`ws://${location.host}/pipe/submit`);
-        this.socket = socket;
-        let message=["a","b"];
-        socket.onopen = (event) => {
-            this.props.store.dispatch({
-                type: "setHeadState",
-                data: "online",
-            })
-//                socket.send("")
-            socket.onmessage = (event)=> {
-//                    console.log('Client received a message', event);
-//                    console.log(message)
-                if(!event.data)
-                    return;
-                message.push(event.data)
-                this.setState({
-                    message
-                })
-
-            };
-            socket.onclose = (event) => {
-                console.log('Client notified socket has closed', event);
-                this.props.store.dispatch({
-                    type: "setHeadState",
-                    data: "offline",
-                })
-            };
-        };
-        let coreStore = function(state, action) {
+let Provider=ReactRedux.Provider;
+const mapStateToProps = (state) => {
+  return {
+  }
+}
+const mapDispatchToProps = function(dispatch){
+  return {
+  }
+}
+let component=React.createClass({
+    getInitialState:function(){
+        let stateStore = function(state, action) {
             switch (action.type) {
-                case "sendMessage":
-                    socket.send(action.data);
-                    break;
             }
         }
 
-        let store = Redux.createStore(coreStore);
+        let store = Redux.createStore(stateStore);
         return {
-            author: '',
-            text: '',
             store,
-            message
         };
     },
-    render: function() {
+    render:function(){
         return (
-            <div className="root-main-area">                   
-                <LeftPanel className="left"/>                    
-                <div className="right">
-                    <Tabs/>
-                    <Title/>                                       
-                    <Menus/>
-                    <ChatMessage message={this.state.message}/>
-                    <Tools/>
-                    <Input store={this.state.store}/>
-                </div>                    
-                <Info/>
+            <Provider  store={this.state.store}>
+            <div className="chat-RootMain-component component">
             </div>
+            </Provider>
         );
-    }
-};
-if(constructor.getChildContext){
-    let type={};
-    let context=constructor.getChildContext();
-    console.log(context)
-    constructor.childContextTypes={};
-    for(let i in context){
-        constructor.childContextTypes[i]=React.PropTypes.any;
-    }
+    },
+//    getDefaultProps:function(){
+//        
+//    },
+//    propTypes:{
+//        
+//    },
+//    mixins:[],    
+//    statics: {
+//        
+//    },
+//    componentWillMount:function(){
+//        
+//    },
+//    componentDidMount:function(){
+//        
+//    },
+//    componentWillReceiveProps:function(nextProps){
+//        
+//    },
+//    shouldComponentUpdate: function(nextProps, nextState) {
+//
+//    },
+//    componentWillUpdate:function(nextProps, nextState){
+//        
+//    },
+//    componentDidUpdate:function(prevProps,prevState){
+//        
+//    },
+//    componentWillUnmount:function(){
+//        
+//    }    
+});
 
-}
-console.log(constructor)
-let RootMain = React.createClass(constructor);
-return RootMain;
+component=ReactRedux.connect(mapStateToProps,mapDispatchToProps)(component);
+return component;
+

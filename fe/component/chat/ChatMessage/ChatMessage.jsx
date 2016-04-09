@@ -1,31 +1,46 @@
-let $$;
-
-function checkScroll(){
-
-}
-let Chat = React.createClass({
-    getInitialState: function() {
-
-        return {};
+let Provider=ReactRedux.Provider;
+let component=React.createClass({
+    getInitialState:function(){
+        return {
+        };
     },
-    componentDidMount:function(){
-        this.$dom=$(ReactDOM.findDOMNode(this));
-        $$=this.$dom.find.bind(this.$dom);
-
-    },
-    handleMessage:function(messages){
-        return messages.map((v,i)=>{
-            return <div key={i} className="message">{v}</div>                        
-        });
-    },
-    render: function() {
+    render:function(){
         return (
-            <div className="Chat-area">
-            <div className="message-wrap">
-                {this.handleMessage(this.props.message)}
-            </div>                
+            <div className="chat-ChatMessage-component component">
             </div>
         );
-    }
+    },
+//    getDefaultProps:function(){
+//        
+//    },
+//    propTypes:{
+//        
+//    },
+//    mixins:[],    
+//    statics: {
+//        
+//    },
+//    componentWillMount:function(){
+//        
+//    },
+//    componentDidMount:function(){
+//        
+//    },
+//    componentWillReceiveProps:function(nextProps){
+//        
+//    },
+//    shouldComponentUpdate: function(nextProps, nextState) {
+//
+//    },
+//    componentWillUpdate:function(nextProps, nextState){
+//        
+//    },
+//    componentDidUpdate:function(prevProps,prevState){
+//        
+//    },
+//    componentWillUnmount:function(){
+//        
+//    }    
 });
-return Chat;
+return component;
+
