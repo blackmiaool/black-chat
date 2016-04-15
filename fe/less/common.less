@@ -4,7 +4,8 @@
 @import "bootstrap/button-groups.less";
 @import "bootstrap/variables.less";
 @import "bootstrap/mixins.less";
-
+@import "bootstrap/alerts.less";
+@import "prefix.less";
 html,
 body {
     margin: 0;
@@ -66,4 +67,13 @@ input{
     .transition(-ms-transform 400ms);
     .transition(-o-transform 400ms);
     .transition(transform 400ms);
+}
+.hide{
+    display: none !important;
+}
+*[data-show="1"]{
+    
+}
+*[data-show="0"]{
+    .hide;
 }
