@@ -69,17 +69,29 @@ let component=React.createClass({
     submit:function(e){
         console.log(this.state)
         e.preventDefault();
+        this.setState({errorMessage:"",showError:0})
         if(this.props.mode=="signin"){
-            
+            $.post("/pipe/signin",this.state,function(data){
+                console.log(typeof data);
+                data=JSON.parse(data);
+                if(data.code==0){
+                    window.location.href=`${window.location.origin}/chat?id=0`
+                }else{
+                    this.setState({errorMessage:data.msg,showError:1})
+                }
+            }.bind(this))
+        }else{
+            $.post("/pipe/signup",this.state,function(data){
+                console.log(typeof data);
+                data=JSON.parse(data);
+                if(data.code==0){
+                    window.location.href=`${window.location.origin}/chat?id=0`
+                }else{
+                    this.setState({errorMessage:data.msg,showError:1})
+                }
+            }.bind(this))
         }
-        $.post("/pipe/signup",this.state,function(data){
-            console.log(typeof data);
-            data=JSON.parse(data);
-            if(data.code==0){
-            }else{
-                this.setState({errorMessage:data.msg,showError:1})
-            }
-        }.bind(this))
+        
         this.props.submit();
     },                     
     render:function(){
@@ -88,7 +100,7 @@ let component=React.createClass({
             <form className="login-LoginForm-component component" data-mode={this.props.mode} onSubmit={this.submit}>
                <input name="invite-code" type="text" className="form-control" placeholder="Invite code (if have)" onChange={this.handleChangeInvite} value={this.state.invite}/>
 
-                <input name="name" type="text" className="form-control" placeholder="User name" onChange={this.handleUserName} value={this.state.userName}/>       
+                <input name="account" type="text" className="form-control" placeholder="User name" onChange={this.handleUserName} value={this.state.userName}/>       
                 <input name="passwd" type="password" className="form-control" placeholder="Password" onChange={this.handlePasswd} value={this.state.passwd}/> 
                 <input name="passwd-again" type="password" className="form-control" placeholder="Password again" onChange={this.handlePasswdAgain} value={this.state.passwdAgain}/>
                 <div className="alert alert-danger" role="alert" data-show={this.state.showError}>

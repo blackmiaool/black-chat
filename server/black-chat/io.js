@@ -14,19 +14,39 @@ function readFileJsonSync(fileName) {
     return JSON.parse(content.toString());
 }
 
-function writeFileJson(fileName,data,cb) {
-    data=JSON.stringify(data);
-    console.log(fileName,data)
-    fs.writeFile(fileName,data,cb);
+
+
+function writeFileJson(fileName, data, cb) {
+    data = JSON.stringify(data);
+    fs.writeFile(fileName, data, cb);
 }
-function writeFileJsonSync(fileName,data) {
-    data=JSON.stringify(data);
-    
-    fs.writeFileSync(fileName,data);    
+
+function writeFileJsonSync(fileName, data) {
+    data = JSON.stringify(data);
+
+    fs.writeFileSync(fileName, data);
 }
-module.exports = {
+
+function readFileJsonSyncForce(fileName, defaultValue) {
+    if (defaultValue === undefined) {
+        defaultValue = {};
+    }
+    let ret; 
+    try {
+        ret = allExports.readFileJsonSync(fileName);
+    } catch (e) {
+        if (!ret) {
+            allExports.writeFileJsonSync(fileName, defaultValue);
+        }
+        ret = allExports.readFileJsonSync(fileName);
+    }
+    return ret;
+}
+let allExports = {
     readFileJson,
     readFileJsonSync,
     writeFileJson,
     writeFileJsonSync,
-}
+    readFileJsonSyncForce,
+};
+module.exports = allExports;

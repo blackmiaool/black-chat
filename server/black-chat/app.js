@@ -29,16 +29,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use("/", express.static(path.join(__dirname, '../../fe/')));
 app.get(/^\/\w+\/?$/, function (req, res) {
+    account.check(req, res);
     res.sendfile(path.join(__dirname, '../../fe/index.html')); // load our public/index.html file
-}); 
+});
+app.post('/pipe/signin', function (req, res) {
+    //    res.cookie("test","123456",{signed:true})
+    account.login(req.body, function (result) {
+        res.status(200);
+        res.send(JSON.stringify(result));
+    }, res)
+})
 app.post('/pipe/signup', function (req, res) {
-    res.cookie("test","123456",{signed:true})
     account.register(req.body, function (info) {
-        if (!info.code&&false) {
+        if (!info.code) {
             setTimeout(function () {
-                account.login(req, function () {
-
-                })
+                account.login(req.body, function (info2) {
+                    res.status(200);
+                    res.send(JSON.stringify(info2));
+                }, res)
             })
 
         } else {
