@@ -70,8 +70,13 @@ let component=React.createClass({
         console.log(this.state)
         e.preventDefault();
         this.setState({errorMessage:"",showError:0})
+        
         if(this.props.mode=="signin"){
-            $.post("/pipe/signin",this.state,function(data){
+            let data2post={
+                userName:this.state.userName,
+                passwd:this.state.passwd,                
+            }
+            $.post("/pipe/signin",data2post,function(data){
                 console.log(typeof data);
                 data=JSON.parse(data);
                 if(data.code==0){
@@ -81,7 +86,16 @@ let component=React.createClass({
                 }
             }.bind(this))
         }else{
-            $.post("/pipe/signup",this.state,function(data){
+            let data2post={
+                invite:this.state.invite,
+                userName:this.state.userName,
+                passwd:this.state.passwd,                
+            }
+            if(this.state.passwd!=this.state.passwdAgain){
+                this.setState({errorMessage:"Password not same.",showError:1});
+                return;
+            }
+            $.post("/pipe/signup",data2post,function(data){
                 console.log(typeof data);
                 data=JSON.parse(data);
                 if(data.code==0){

@@ -1,25 +1,28 @@
+/*jslint esversion: 6 */
+/*jslint node: true*/
 'use strict';
 let through = require('through2');
 let gutil = require('gulp-util');
 let PluginError = gutil.PluginError;
-let fs = require("fs")
+let fs = require("fs");
 const PLUGIN_NAME = 'blackmiaool manage tool';
 let mkdirp = require('mkdirp');
 
 
 let pageConfig = {
     chat: {
-        RootHeader: 1,
+        //        RootHeader: 1,
+//        RootLeft: {
+//            
+//        },
+        LeftHeader: 1,
+        RoomList: 1,
         RootMain: {
-            Tabs: 1,
             Title: 1,
-            Menus: 1,
             ChatMessage: 1,
-            Input: 1,
-            Info: 1,
-            LeftPanel: 1,
             Tools: 1,
-            test: 1
+            Input: 1,
+
         },
     },
     login: {
@@ -30,7 +33,7 @@ let pageConfig = {
     common: {
         CommonHeader: 1
     }
-}
+};
 var tmpls = {
     componentJsContainer: {
         name: "container_component.jsx"
@@ -57,7 +60,7 @@ function tmplsGet(name, data) {
     var pattern = new RegExp(/\{\{([\s\S]+?)\}\}/g);
     var target = src.replace(pattern, function (outterText, innerText) {
         return data[innerText];
-    })
+    });
     return target;
 }
 
@@ -68,7 +71,7 @@ function isObj(data) {
 function findObj(obj, name) {
     for (let i in obj) {
         if (i === name && obj[i] !== 0) {
-            return obj[i]
+            return obj[i];
         } else {
             if (isObj(obj[i])) {
                 let result = findObj(obj[i], name);
@@ -124,12 +127,12 @@ function componentsHandle(target_functions) {
                     names[0] : (isRoot ? modName : page);
                 params[i] = `'${modHead}/${pagePath}/${name}/${name}.js'`;
 
-            })
+            });
             params = params.concat(extraParams);
             vars = vars.concat(extraVars);
             head = `define([${params.toString()}],function(${vars.toString()}){\n`;
-            foot = `\n})`
-            file.contents = new Buffer(head + file.contents.toString() + foot, target_functions)
+            foot = `\n})`;
+            file.contents = new Buffer(head + file.contents.toString() + foot, target_functions);
             if (fileName != modName + ".jsx") {
                 this.emit('error', new PluginError(PLUGIN_NAME, `file name doesn't match path name path:${page}/${modName} file:${fileName}`));
             }
@@ -147,24 +150,27 @@ function componentsHandle(target_functions) {
 function getDeps(config, type) {
     let deps = [];
     for (let i in config) {
-        let value=config[i];        
-        let item={name:i,type:value};
-        if(isObj(value)){
-            item.type="obj";
+        let value = config[i];
+        let item = {
+            name: i,
+            type: value
+        };
+        if (isObj(value)) {
+            item.type = "obj";
         }
         if (type === "solid") {
             if (isObj(value)) {
                 deps.push(item);
-                deps = deps.concat(getDeps(value, type))
+                deps = deps.concat(getDeps(value, type));
             } else if (value) {
                 deps.push(item);
             }
         } else {
             deps.push(item);
             if (isObj(value)) {
-                deps = deps.concat(getDeps(value))
-            }else{
-                
+                deps = deps.concat(getDeps(value));
+            } else {
+
             }
         }
     }
@@ -189,7 +195,7 @@ function generateLess() {
         //        console.log(page, deps);
         let lessInfo = `@import "common.less";\n@import "variables.less";\n@import "${page}/${page}.less";\n`;
         deps.forEach(function (name, i) {
-            name=name.name;
+            name = name.name;
             let paths = name.split("/");
             let pageName = page;
             let modName = name;
@@ -198,8 +204,8 @@ function generateLess() {
                 modName = paths[1];
             }
             lessInfo += `@import "${pageName}/${modName}/${modName}.less";\n`;
-        })
-        let lessPath = `less/page/${page}.less`
+        });
+        let lessPath = `less/page/${page}.less`;
         fs.writeFileSync(lessPath, lessInfo);
         //        console.log(lessInfo);
     }
@@ -212,14 +218,14 @@ function generateComponent() {
         let page = i;
         let deps = allDeps[i];
         deps.forEach(function (name, i) {
-            let type=name.type;
-            name=name.name;
+            let type = name.type;
+            name = name.name;
             let path = `${componentDir}/${page}`;
             try {
                 fs.statSync(`${path}/${name}`).isDirectory(); //check if exist
             } catch (e) {
                 mkdirp.sync(`${path}/${name}`);
-                fs.writeFileSync(`${path}/${name}/${name}.jsx`, tmplsGet(type=="obj"||type=="2"?"componentJsContainer":"componentJsPresentational", {
+                fs.writeFileSync(`${path}/${name}/${name}.jsx`, tmplsGet(type == "obj" || type == "2" ? "componentJsContainer" : "componentJsPresentational", {
                     page, name
                 }));
                 fs.writeFileSync(`${path}/${name}/${name}.less`, tmplsGet("componentLess", {
@@ -227,7 +233,7 @@ function generateComponent() {
                 }));
                 return false;
             }
-        })
+        });
     }
     //    try {
     //        fs.statSync(widget_folder + get_widget_id()).isDirectory();

@@ -5,9 +5,10 @@ let io = require("./io.js");
 let path = require('path');
 let randomString = require('random-string');
 let accountFileName = path.join(__dirname, "..", "data", "accounts.json");
-
+let inviteFileName= path.join(__dirname, "..", "data", "invite.json");
 
 let accounts = io.readFileJsonSyncForce(accountFileName);
+let invites=io.readFileJsonSyncForce(inviteFileName);
 
 function login(data, cb, res) {
     let accountToken = randomString({
@@ -45,7 +46,8 @@ function login(data, cb, res) {
 function checkRegisterInfo(data) {
     let userName = data.userName;
     let pwd = data.passwd;
-    let ret;
+    let invite=data.invite;
+    let ret=false;
     if (accounts[userName]) {
         ret = {
             msg: "User name is already exist.",
@@ -77,8 +79,11 @@ function checkRegisterInfo(data) {
             msg: `User name contains spectial chars: ${badChars}.`,
             code: -7,
         };
-    }else{
-        ret=false;
+    }else if(invite&&!invites[invite]){
+        ret={
+            msg: "Invalid invite code.",
+            code: -8,
+        };
     }
     return ret;
 }
@@ -86,6 +91,7 @@ function checkRegisterInfo(data) {
 function register(data, cb) {
     console.log(data);
     let checkResult = checkRegisterInfo(data);
+     
     if (!checkResult.code) {
         let accountToken = randomString({
             length: 20

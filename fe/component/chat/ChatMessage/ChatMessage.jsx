@@ -4,9 +4,17 @@ let component=React.createClass({
         return {
         };
     },
-    render:function(){
+    handleMessage:function(messages){
+        return messages.map((v,i)=>{
+            return <div key={i} className="message">{v}</div>                        
+        });
+    },
+    render: function() {
         return (
-            <div className="chat-ChatMessage-component component">
+            <div className="Chat-area">
+            <div className="message-wrap">
+                {this.handleMessage(this.props.message)}
+            </div>                
             </div>
         );
     },

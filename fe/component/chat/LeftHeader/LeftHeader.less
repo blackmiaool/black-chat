@@ -1,0 +1,29 @@
+@import "variables.less";
+@import "common.less";
+.chat-LeftHeader-component {
+    background-color: rgb(47, 187, 222);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    .avatar-area {
+        .abs-fill;
+        bottom: auto;
+        height: 120px;
+        .connection-state {
+            .common-square(15px);
+            display: inline-block;
+            margin-top: 50px;
+            border: 1px rgb(66, 196, 165) solid;
+            border-radius: 100px;
+            background-color: rgb(79, 94, 96);
+            &[data-state="online"] {
+                background-color: rgb(109, 236, 71);
+            }
+        }
+    }
+    .group-area {}
+    .tools-area {
+        .abs-fill;
+        top: auto;
+    }
+}

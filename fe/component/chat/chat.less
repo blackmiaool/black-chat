@@ -1,0 +1,22 @@
+.chat-root {
+    .abs-fill;
+    @left-width:50px;;
+    @center-width:180px;
+    >.left {
+       .abs-fill;
+        width:@left-width;
+        right: auto;
+    }
+    >.center {
+        .abs-fill;
+        left:@left-width;
+        width: @center-width;
+        right: auto;
+    }
+    >.right {
+        .abs-fill;        
+        left: @left-width + @center-width;
+        border-left: 1px #ccc solid;
+        
+    }
+}

@@ -1,12 +1,16 @@
-let Provider=ReactRedux.Provider;
-let component=React.createClass({
-    getInitialState:function(){
-        return {
-        };
+const mapStateToProps = (state) => {
+    return {}
+}
+const mapDispatchToProps = function(dispatch) {
+    return {}
+}
+let component = React.createClass({
+    getInitialState: function() {
+        return {};
     },
-    render:function(){
+    render: function() {
         return (
-            <div className="chat-Info-component component">
+            <div className="chat-RoomList-component component">
             </div>
         );
     },
@@ -42,5 +46,5 @@ let component=React.createClass({
 //        
 //    }    
 });
+component=ReactRedux.connect(mapStateToProps,mapDispatchToProps)(component);
 return component;
-

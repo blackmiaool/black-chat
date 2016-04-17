@@ -1,4 +1,16 @@
-let Provider=ReactRedux.Provider;
+let Provider = ReactRedux.Provider;
+const mapStateToProps = (state) => {
+    return {
+        state:state.headState
+    }
+}
+const mapDispatchToProps = function(dispatch) {
+    return {
+        setHeadState:function(state){
+            dispatch({type:"setHeadState",state});
+        },
+    }
+}
 let component=React.createClass({
     getInitialState:function(){
         return {
@@ -7,6 +19,7 @@ let component=React.createClass({
     render:function(){
         return (
             <div className="chat-RootHeader-component component">
+            {this.props.state}
             </div>
         );
     },
@@ -42,5 +55,6 @@ let component=React.createClass({
 //        
 //    }    
 });
+component = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(component);
 return component;
 
