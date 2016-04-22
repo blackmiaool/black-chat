@@ -1,22 +1,33 @@
+@main-header-height: 60px;
+@main-header-border: 1px solid #ccc;
 .chat-root {
     .abs-fill;
-    @left-width:50px;;
-    @center-width:180px;
+    @left-width: 50px;
+    @center-width: 180px;
+    @top-header-height: 50px * 0.8;
+    >.header-wrap {
+        height: @top-header-height/0.8;
+        zoom: 0.8;
+        border-bottom: 1px #aaa solid;
+        background-color: #efefef;
+    }
     >.left {
-       .abs-fill;
-        width:@left-width;
+        .abs-fill;
+        top: @top-header-height;
+        width: @left-width;
         right: auto;
     }
     >.center {
         .abs-fill;
-        left:@left-width;
+        top: @top-header-height;
+        left: @left-width;
         width: @center-width;
         right: auto;
     }
     >.right {
-        .abs-fill;        
+        .abs-fill;
+        top: @top-header-height;
         left: @left-width + @center-width;
         border-left: 1px #ccc solid;
-        
     }
 }

@@ -48,7 +48,7 @@ gulp.task('js', ['jsx'], function () {
         .pipe(livereload());
 })
 gulp.task('mv-dist', function () {
-    return gulp.src('libs/**/*')
+    return gulp.src(['libs/**/*', 'static/**/*'])
         .pipe(gulp.dest('dist/'))
         .pipe(livereload());
 });
@@ -60,17 +60,18 @@ gulp.task('reload', function () {
 });
 gulp.task('less', function () {
     let less = require('gulp-less');
-    var e = less({
-                paths: [path.join(__dirname, 'less'),path.join(__dirname, 'component')]
+    less = less({
+        paths: [path.join(__dirname, 'less'),
+                path.join(__dirname, 'component')]
     });
-    e.on('error', function (ee) {
+    less.on('error', function (ee) {
         gutil.log(ee);
         this.emit('end');
     });
- 
+
 
     return gulp.src('less/page/*.less')
-        .pipe(e)
+        .pipe(less)
         .pipe(cached("less"))
         .pipe(gulp.dest('dist/css'))
         .pipe(livereload());
@@ -88,11 +89,4 @@ gulp.watch('js/**/*.js', ['js']);
 gulp.watch('component/**/*.jsx', ['jsx']);
 gulp.watch('libs/**/*.*', ['mv-dist']);
 gulp.watch('index.html', ['reload']);
-gulp.watch('html/**/*.html', ['html']); 
-
-
- 
-
-
-
-
+gulp.watch('html/**/*.html', ['html']);

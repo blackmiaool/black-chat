@@ -5,13 +5,17 @@
 @import "bootstrap/variables.less";
 @import "bootstrap/mixins.less";
 @import "bootstrap/alerts.less";
+@import "bootstrap/glyphicons.less";
 @import "prefix.less";
 html,
 body {
     margin: 0;
     padding: 0;
 }
-
+#wrap{
+    .abs-fill;
+//    min-height: 400px
+}
 * {
     box-sizing: border-box;
     font-family: punctuation, "PingFangSC-Regular", "Microsoft Yahei", "sans-serif";
@@ -52,6 +56,10 @@ input{
     border-left: 4px solid transparent;
     vertical-align: middle;
     margin: 0px;
+}
+.fill{
+    height: 100%;
+    width: 100%;
 }
 .abs-fill{
     position: absolute;

@@ -1,9 +1,28 @@
 @import "variables.less";
 @import "common.less";
+@import "chat/chat.less";
 .chat-RootMain-component {
     height: 100%;
     width: 100%;
-
-
     background-color: #f8f8f8;
+    @top-height: @main-header-height;
+    @right-width: 130px;
+    >.top {
+        .abs-fill;
+        bottom: auto;
+        height: @top-height;
+        border-bottom: @main-header-border;
+    }
+    >.left {
+        .abs-fill;
+        top: @top-height;
+        right: @right-width;
+    }
+    >.right {
+        .abs-fill;
+        top: @top-height;
+        left: auto;
+        width: @right-width;
+        border-left: 1px #aaa solid;
+    }
 }

@@ -1,5 +1,54 @@
 @import "variables.less";
 @import "common.less";
-.chat-RoomList-component{
-    
+@import "chat/chat.less";
+.chat-RoomList-component {
+    .fill;
+    background-color: rgb(239, 239, 239);
+    >.header {
+        position: relative;
+        height: @main-header-height;
+        border-bottom: @main-header-border;
+        .input-wrap {
+            @height: 30px;
+            height: @height;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 85%;
+            .transform(translate(-50%, -50%));
+            input {
+                @inactive-color: rgb(220, 217, 217);
+                margin: 0;
+                width: 100%;
+                outline: none !important;
+                border: 1px solid @inactive-color;
+                background-color: @inactive-color;
+                padding-left: 4px;
+                &:focus {
+                    border: 1px solid rgb(88, 205, 238);
+                    background: white;
+                    &+.glyphicon{
+                        display: none;
+                    }
+                }
+                
+                
+            }
+            &:focus{
+                .glyphicon{
+                    .hide;
+                } 
+            }
+            .glyphicon {
+                .abs-fill;
+                right: auto;
+                top: auto;
+                line-height: @height;
+                vertical-align: middle;
+                left: 5px;
+                color: rgb(175,175,175);
+            }
+        }
+    }
+    >.body {}
 }

@@ -9,12 +9,13 @@ const PLUGIN_NAME = 'blackmiaool manage tool';
 let mkdirp = require('mkdirp');
 
 
-let pageConfig = {
+let pageConfig = {//0:reference 1:Presentational 2 or obj:container
     chat: {
         //        RootHeader: 1,
 //        RootLeft: {
 //            
 //        },
+        "common/CommonHeader": 0,
         LeftHeader: 1,
         RoomList: 1,
         RootMain: {
@@ -22,7 +23,8 @@ let pageConfig = {
             ChatMessage: 1,
             Tools: 1,
             Input: 1,
-
+            Members:1,
+            Annunciator:1,
         },
     },
     login: {

@@ -5,9 +5,11 @@
     width: 100%;
     height: 100%;
     text-align: center;
+    display: flex;
+    flex-direction: column;
     .avatar-area {
-        .abs-fill;
-        bottom: auto;
+        //        .abs-fill;
+        //        bottom: auto;
         height: 120px;
         .connection-state {
             .common-square(15px);
@@ -21,9 +23,22 @@
             }
         }
     }
-    .group-area {}
+    .group-area {
+        color: white;
+        flex-grow: 1;
+        .glyphicon {
+            cursor: pointer;
+            display: block;
+            font-size: 25px;
+            margin-bottom: 40px;
+            opacity: 0.5;
+            &[data-state="1"] {
+                opacity: 1;
+            }
+        }
+    }
     .tools-area {
         .abs-fill;
         top: auto;
     }
-}
+} 

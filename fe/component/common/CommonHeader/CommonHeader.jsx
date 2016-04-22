@@ -9,9 +9,13 @@ let component=React.createClass({
             <div className="common-CommonHeader-component component">
                     <div className="center page-max-width">
                         <a className="icon" href="javascript:window.location.origin"><img  src="/icon.png"/></a> 
-                        <button className="nav-btn create">Create a room</button>
+                        {(()=>{if(common.args.page!="chat"){
+                            return <button className="nav-btn create">Create a room</button>
+                        }})()}
+                        
                         <div className="extend"></div>
                         <input type="text" className="room form-control" placeholder="Enter a room"/>
+                        
                         <button className="btn btn-default sign-in">Sign in</button>
                         <button className="btn btn-success sign-up">Sign up</button>
                         

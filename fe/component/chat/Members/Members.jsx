@@ -8,23 +8,9 @@ let component = React.createClass({
     getInitialState: function() {
         return {};
     },
-    handleChangeSearch:function(event){
-        this.state.search=event.target.value;
-    },
     render: function() {
         return (
-            <div className="chat-RoomList-component component">
-            <div className="header">
-               <div className="input-wrap">
-                 
-                  <input type="text" onChange={this.handleChangeSearch} value={this.state.search}/> 
-                  <span className="glyphicon glyphicon-search"></span>
-               </div>
-                
-            </div>
-            <div className="body">
-                
-            </div>
+            <div className="chat-Members-component component">
             </div>
         );
     },

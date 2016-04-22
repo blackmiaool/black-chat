@@ -17,7 +17,7 @@ let Root=React.createClass({
 //        store.subscribe(()=>{
 //            this.setState({
 //                headState:store.getState().headState
-//            });
+//            }); 
 //
 //        }) 
         return {store};
@@ -26,7 +26,10 @@ let Root=React.createClass({
         return (
             <Provider store={this.state.store}>
             <div id="page-login" className="page">
-                <CommonHeader/>
+               <div className="header-wrap">
+                  <CommonHeader/> 
+               </div>
+                
                 <div className="main">
                     <div className="center  page-max-width">
                         <div className="desc">

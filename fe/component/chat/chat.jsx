@@ -8,6 +8,10 @@ let Root=React.createClass({
 //                    this.setState()
                     return Object.assign({},state,{headState:action.state})
                     break;
+                case "setChatTab":
+                    console.log(action.name)
+                    return Object.assign({},state,{chatTab:action.name})
+                    break;
             }
             return state;
         }
@@ -25,7 +29,11 @@ let Root=React.createClass({
     render:function(){
         return (
             <Provider store={this.state.store}>
+            
             <div className="chat-root">
+              <div className="header-wrap">
+                  <CommonHeader/> 
+               </div>
                <div className="left">
                    <LeftHeader/> 
                </div>

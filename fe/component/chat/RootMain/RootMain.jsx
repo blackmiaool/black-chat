@@ -4,19 +4,22 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = function(dispatch) {
     return {
-        setHeadState:function(state){
-            dispatch({type:"setHeadState",state});
+        setHeadState: function(state) {
+            dispatch({
+                type: "setHeadState",
+                state
+            });
         },
     }
 }
 let component = React.createClass({
     getInitialState: function() {
         this.socket = new WebSocket(`ws://${location.host}/pipe/submit`);
-        let socket=this.socket;
+        let socket = this.socket;
         let message = ["a", "b"];
         socket.onopen = (event) => {
             this.props.setHeadState("online");
-                //                socket.send("")
+            //                socket.send("")
             socket.onmessage = (event) => {
                 //                    console.log('Client received a message', event);
                 //                    console.log(message)
@@ -50,19 +53,30 @@ let component = React.createClass({
             message
         };
     },
-    sendMessage:function(data){
+    sendMessage: function(data) {
         console.log(data.text)
-        this.state.store.dispatch({type:"sendMessage",data:data.text});
+        this.state.store.dispatch({
+            type: "sendMessage",
+            data: data.text
+        });
     },
     render: function() {
         return (
             <Provider  store={this.state.store}>
-            <div className="chat-RootMain-component component">            
-                    <Title/>
-                    <ChatMessage message={this.state.message}/>
+            <div className="chat-RootMain-component component"> 
+                 <div className="top">
+                  <Title/>   
+                 </div>
+                  
+                   <div className="left">
+                       <ChatMessage message={this.state.message}/>
                     <Tools/>
                     <Input store={this.state.store} submit={this.sendMessage}/>
-
+                   </div>           
+                   <div className="right">
+                       <Members/>
+                        <Annunciator/>
+                   </div>                    
             </div>
             </Provider>
         );
