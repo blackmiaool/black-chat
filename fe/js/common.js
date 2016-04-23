@@ -55,13 +55,19 @@ define("common", function () {
         document.cookie = name + "=a; expires=" + date.toGMTString();
     }
 
-    function changePage(page, args, replace) {
-        let argsStr = [];
+    function changePage(page, args={}, replace) {
+        let argsStr = [];        
         for (let i in args) {
             argsStr.push(`${i}=${args[i]}`);
         }
-        argsStr.join("&");
-        let targetUrl = `${location.origin}/${page}?${argsStr}`;
+        argsStr=argsStr.join("&");
+        let targetUrl;
+        if(argsStr.length){
+            targetUrl = `${location.origin}/${page}?${argsStr}`;
+        }else{
+            targetUrl = `${location.origin}/${page}`;
+        }
+        
         if (replace) {
             location.replace(targetUrl)
         } else {
@@ -80,6 +86,7 @@ define("common", function () {
         setCookie,
         getCookie,
         delCookie,
+        changePage,
     }
     return exports;
 })

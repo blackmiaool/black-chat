@@ -1,9 +1,11 @@
 let Provider=ReactRedux.Provider;
 let Root=React.createClass({
     getInitialState:function(){
-        let rootStore=(state={mode:"signup"},action)=>{                
+        console.log(common.args.mode)
+        let rootStore=(state={mode:common.args.mode?common.args.mode:"signup"},action)=>{ 
+            console.log(state)
             switch(action.type){
-                case "setMode":
+                case "setMode"://signup or signin
 //                    state.mode=action.mode;
                     return Object.assign({},state,{mode:action.mode})
                     break;

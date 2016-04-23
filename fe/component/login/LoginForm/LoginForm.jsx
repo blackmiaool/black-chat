@@ -80,7 +80,7 @@ let component=React.createClass({
                 console.log(typeof data);
                 data=JSON.parse(data);
                 if(data.code==0){
-                    window.location.href=`${window.location.origin}/chat?id=0`
+                    common.changePage("chat");
                 }else{
                     this.setState({errorMessage:data.msg,showError:1})
                 }
@@ -99,7 +99,7 @@ let component=React.createClass({
                 console.log(typeof data);
                 data=JSON.parse(data);
                 if(data.code==0){
-                    window.location.href=`${window.location.origin}/chat?id=0`
+                   common.changePage("chat");
                 }else{
                     this.setState({errorMessage:data.msg,showError:1})
                 }

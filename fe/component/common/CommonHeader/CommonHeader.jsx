@@ -1,4 +1,24 @@
 let Provider = ReactRedux.Provider;
+const mapStateToProps = function (state) {
+    return {
+
+    }
+}
+const mapDispatchToProps = function (dispatch) {
+    let sign;
+    if (common.args.page == "login") {
+        sign=function(mode){
+            dispatch({type:"setMode",mode})
+        }
+    } else {
+        sign=function(mode){
+            common.changePage("login",{mode});
+        }
+    }
+    return {
+        sign
+    }
+}
 let component = React.createClass({
     getInitialState: function () {
         return {};
@@ -23,12 +43,12 @@ let component = React.createClass({
                                     </span>
                                 
                             }else{
-                                return [<button className="btn btn-default sign-in" key="1">Sign in</button>,
-                        <button className="btn btn-success sign-up" key="2">Sign up</button>];
+                                return [<button className="btn btn-default sign-in" key="1" onClick={this.props.sign.bind(this,"signin")}>Sign in</button>,
+                        <button className="btn btn-success sign-up" key="2" onClick={this.props.sign.bind(this,"signup")}>Sign up</button>];
                             }
                         })()}
                         <ul className="dropdown-menu">
-                            <li><a href="#">Profile</a></li>
+                            <li className="hide"><a href="#">Profile</a></li>
                             <li><a href={`${location.origin}/logout?url=${encodeURIComponent(location.href)}`}>Log out</a></li>
                         </ul>
                         
@@ -69,4 +89,5 @@ let component = React.createClass({
     //        
     //    }    
 });
+component = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(component);
 return component;
