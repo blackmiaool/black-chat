@@ -1,9 +1,6 @@
 @import "variables.less";
-@import "common.less"; 
-.chat-root .common-CommonHeader-component.component{
-    
-}
-.common-CommonHeader-component.component{  
+@import "common.less";
+.common-CommonHeader-component.component {
     .fill;
     text-align: center;
     padding: 0 10px;
@@ -12,13 +9,42 @@
         &:extend(.abs-fill);
         display: flex;
         align-items: center;
-        position: relative;                
+        position: relative;
         line-height: 70px;
         height: 100%;
+        .userNameWrap {
+            font-weight: normal;
+            .userName{
+                margin-right: 7px;
+                margin-left: 7px;
+                display: inline-block;
+            }
+            .arrow{
+                .caret(3px);
+            }
+            &:hover+.dropdown-menu{
+                display: block;
+            }
+        }
+        .dropdown-menu{
+            left: auto;
+            right: 0;
+//            display: block;
+            float: none;
+            right: 0;
+            font-size: 16px;
+            a{
+                text-decoration: none;
+            }
+            &:hover{
+                display: block;
+            }
+        }
+        
         >.icon {
-//            &:extend(.abs-fill);
-//            right: auto; 
-            img{
+            //            &:extend(.abs-fill);
+            //            right: auto; 
+            img {
                 display: block;
             }
             display: inline-block;
@@ -36,11 +62,9 @@
         >.room {
             height: 30px;
             width: 200px;
-            margin-right: 10px; 
+            margin-right: 10px;
         }
-        >.sign-btn{
-            
-        }
+        >.sign-btn {}
         >.sign-in {
             &:extend(.sign-btn);
             margin-right: 10px;

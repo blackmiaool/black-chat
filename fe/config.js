@@ -10,11 +10,8 @@ let mkdirp = require('mkdirp');
 
 
 let pageConfig = {//0:reference 1:Presentational 2 or obj:container
+//    logout:{},
     chat: {
-        //        RootHeader: 1,
-//        RootLeft: {
-//            
-//        },
         "common/CommonHeader": 0,
         LeftHeader: 1,
         RoomList: 1,
