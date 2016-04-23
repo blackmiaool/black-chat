@@ -5,12 +5,12 @@ let requirejsConfig={
     }
 };
 
-let pages=["chat","login"];
+let pages=["chat","login","logout"];
 pages.forEach(function(v,i){
     requirejsConfig.paths[v]=v+"/"+v;
 })
 define("entry",["common"],function(common){   
-    let page=common.args.segments[0];
+    let page=common.args.page;
     if(pages.indexOf(page)=== -1){
         window.location.href=location.origin+"/chat";
     }else{

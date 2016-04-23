@@ -1,10 +1,5 @@
-const mapStateToProps = (state) => {
-    return {}
-}
-const mapDispatchToProps = function (dispatch) {
-    return {}
-}
-let component = React.createClass({
+let Provider = ReactRedux.Provider;
+let Root = React.createClass({
     getInitialState: function () {
         let stateStore = function (state, action) {
             switch (action.type) {}
@@ -17,8 +12,10 @@ let component = React.createClass({
     },
     render: function () {
         return (
-            <div className="{{page}}-{{name}}-component component">
-            </div>
+            <Provider store={this.state.store}>
+            <div id="page-{{page}}" className="page">                   
+            </div>  
+            </Provider>
         );
     },
     //    getDefaultProps:function(){
@@ -51,7 +48,9 @@ let component = React.createClass({
     //    },
     //    componentWillUnmount:function(){
     //        
-    //    }    
+    //    }  
 });
-component = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(component);
-return component;
+ReactDOM.render(
+    <Root/>,
+    $("#wrap")[0]
+);

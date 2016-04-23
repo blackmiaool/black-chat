@@ -1,17 +1,14 @@
-let Provider=ReactRedux.Provider;
+let Provider = ReactRedux.Provider;
 const mapStateToProps = (state) => {
-  return {
-  }
+    return {}
 }
-const mapDispatchToProps = function(dispatch){
-  return {
-  }
+const mapDispatchToProps = function (dispatch) {
+    return {}
 }
-let component=React.createClass({
-    getInitialState:function(){
-        let stateStore = function(state, action) {
-            switch (action.type) {
-            }
+let component = React.createClass({
+    getInitialState: function () {
+        let stateStore = function (state, action) {
+            switch (action.type) {}
         }
 
         let store = Redux.createStore(stateStore);
@@ -19,7 +16,7 @@ let component=React.createClass({
             store,
         };
     },
-    render:function(){
+    render: function () {
         return (
             <Provider  store={this.state.store}>
             <div className="{{page}}-{{name}}-component component">
@@ -27,39 +24,38 @@ let component=React.createClass({
             </Provider>
         );
     },
-//    getDefaultProps:function(){
-//        
-//    },
-//    propTypes:{
-//        
-//    },
-//    mixins:[],    
-//    statics: {
-//        
-//    },
-//    componentWillMount:function(){
-//        
-//    },
-//    componentDidMount:function(){
-//        
-//    },
-//    componentWillReceiveProps:function(nextProps){
-//        
-//    },
-//    shouldComponentUpdate: function(nextProps, nextState) {
-//
-//    },
-//    componentWillUpdate:function(nextProps, nextState){
-//        
-//    },
-//    componentDidUpdate:function(prevProps,prevState){
-//        
-//    },
-//    componentWillUnmount:function(){
-//        
-//    }    
+    //    getDefaultProps:function(){
+    //        
+    //    },
+    //    propTypes:{
+    //        
+    //    },
+    //    mixins:[],    
+    //    statics: {
+    //        
+    //    },
+    //    componentWillMount:function(){
+    //        
+    //    },
+    //    componentDidMount:function(){
+    //        
+    //    },
+    //    componentWillReceiveProps:function(nextProps){
+    //        
+    //    },
+    //    shouldComponentUpdate: function(nextProps, nextState) {
+    //
+    //    },
+    //    componentWillUpdate:function(nextProps, nextState){
+    //        
+    //    },
+    //    componentDidUpdate:function(prevProps,prevState){
+    //        
+    //    },
+    //    componentWillUnmount:function(){
+    //        
+    //    }    
 });
 
-component=ReactRedux.connect(mapStateToProps,mapDispatchToProps)(component);
+component = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(component);
 return component;
-

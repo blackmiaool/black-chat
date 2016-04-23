@@ -1,24 +1,26 @@
-const mapStateToProps = (state) => {
-    return {}
-}
-const mapDispatchToProps = function (dispatch) {
-    return {}
-}
-let component = React.createClass({
+let Provider = ReactRedux.Provider;
+let Root = React.createClass({
     getInitialState: function () {
         let stateStore = function (state, action) {
             switch (action.type) {}
         }
 
         let store = Redux.createStore(stateStore);
+        common.delCookie("userNameJs");
+        common.delCookie("token");
+        common.delCookie("userName");
+        location.replace(decodeURIComponent(common.args.url));
+        
         return {
             store,
         };
     },
     render: function () {
         return (
-            <div className="{{page}}-{{name}}-component component">
-            </div>
+            <Provider store={this.state.store}>
+            <div id="page-logout" className="page">                   
+            </div>  
+            </Provider>
         );
     },
     //    getDefaultProps:function(){
@@ -51,7 +53,9 @@ let component = React.createClass({
     //    },
     //    componentWillUnmount:function(){
     //        
-    //    }    
+    //    }  
 });
-component = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(component);
-return component;
+ReactDOM.render(
+    <Root/>,
+    $("#wrap")[0]
+);

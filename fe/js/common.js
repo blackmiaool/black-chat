@@ -30,8 +30,9 @@ define("common", function () {
             segments: a.pathname.replace(/^\//, '').split('/')
         };
     }
-    let args = parseURL(window.location.href);
-    args.page = args.segments[0];
+    let url = parseURL(window.location.href);
+    let args=url.params;
+    args.page = url.segments[0];
 
     function setCookie(c_name, value, expiredays) {
         var exdate = new Date()
@@ -47,6 +48,27 @@ define("common", function () {
         else
             return null;
     }
+
+    function delCookie(name) { //为cookie name
+        var date = new Date();
+        date.setTime(date.getTime() - 10000);
+        document.cookie = name + "=a; expires=" + date.toGMTString();
+    }
+
+    function changePage(page, args, replace) {
+        let argsStr = [];
+        for (let i in args) {
+            argsStr.push(`${i}=${args[i]}`);
+        }
+        argsStr.join("&");
+        let targetUrl = `${location.origin}/${page}?${argsStr}`;
+        if (replace) {
+            location.replace(targetUrl)
+        } else {
+            location.href = targetUrl;
+        }
+
+    }
     let initPage = () => {
 
     };
@@ -54,8 +76,10 @@ define("common", function () {
         initPage,
         parseURL,
         args,
+        url,
         setCookie,
         getCookie,
+        delCookie,
     }
     return exports;
 })

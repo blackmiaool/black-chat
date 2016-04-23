@@ -9,8 +9,8 @@ const PLUGIN_NAME = 'blackmiaool manage tool';
 let mkdirp = require('mkdirp');
 
 
-let pageConfig = {//0:reference 1:Presentational 2 or obj:container
-//    logout:{},
+let pageConfig = { //0:reference 1:Presentational 2 or obj:container
+        logout:{},
     chat: {
         "common/CommonHeader": 0,
         LeftHeader: 1,
@@ -20,8 +20,8 @@ let pageConfig = {//0:reference 1:Presentational 2 or obj:container
             ChatMessage: 1,
             Tools: 1,
             Input: 1,
-            Members:1,
-            Annunciator:1,
+            Members: 1,
+            Annunciator: 1,
         },
     },
     login: {
@@ -42,6 +42,12 @@ var tmpls = {
     },
     componentLess: {
         name: "component.less"
+    },
+    pageJsx: {
+        name: "page.jsx"
+    },
+    pageLess: {
+        name: "page.less"
     }
 };
 
@@ -185,13 +191,12 @@ function getAllDeps(config, type) {
     }
     return ret;
 }
-//console.log(getAllDeps(pageConfig,"solid"));
+
 function generateLess() {
     let allDeps = getAllDeps(pageConfig);
     for (let i in allDeps) {
         let page = i;
         let deps = allDeps[i];
-        //        console.log(page, deps);
         let lessInfo = `@import "common.less";\n@import "variables.less";\n@import "${page}/${page}.less";\n`;
         deps.forEach(function (name, i) {
             name = name.name;
@@ -215,6 +220,20 @@ function generateComponent() {
     let allDeps = getAllDeps(pageConfig, "solid");
     for (let i in allDeps) {
         let page = i;
+
+        let path = `${componentDir}/${page}`;
+        try {
+            fs.statSync(path).isDirectory(); //check if exist
+        } catch (e) {
+            mkdirp.sync(path);
+            fs.writeFileSync(`${path}/${page}.jsx`, tmplsGet("pageJsx", {
+                page
+            }));
+            fs.writeFileSync(`${path}/${page}.less`, tmplsGet("pageLess", {
+                page
+            }));
+        }
+
         let deps = allDeps[i];
         deps.forEach(function (name, i) {
             let type = name.type;
