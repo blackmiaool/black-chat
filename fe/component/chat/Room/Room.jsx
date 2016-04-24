@@ -6,12 +6,27 @@ const mapDispatchToProps = function (dispatch) {
 }
 let component = React.createClass({
     getInitialState: function () {
+        let stateStore = function (state, action) {
+            switch (action.type) {}
+        }
+        setTimeout(function(){
+           console.log(this.props)
+        }.bind(this))
+        
+        let store = Redux.createStore(stateStore);
         return {
+            store,
         };
     },
     render: function () {
         return (
-            <div className="{{page}}-{{name}}-component component">
+            <div className="chat-Room-component component" data-checked={this.props.checked}>
+            <span className="round-close glyphicon glyphicon-remove"></span>
+            <div className="icon">
+                <img src={this.props.icon.url} alt="" className="icon-img"/>
+            </div>
+            <label className="name">{this.props.name}</label>
+            <div className="message-cnt"></div>
             </div>
         );
     },

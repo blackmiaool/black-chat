@@ -27,7 +27,7 @@ let component = React.createClass({
         return (
             <div className="common-CommonHeader-component component">
                     <div className="center page-max-width">
-                        <a className="icon" href="javascript:window.location.origin"><img  src="/icon.png"/></a> 
+                        <a className="icon" href={window.location.origin}><img  src="/icon.png"/></a> 
                         {(()=>{if(common.args.page!="chat"){
                             return <button className="nav-btn create">Create a room</button>
                         }})()}

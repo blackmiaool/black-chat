@@ -51,23 +51,19 @@ let component=React.createClass({
         }
     },
     handleChangeInvite:function(event){
-        console.log(event.target.value)
         this.setState({invite: event.target.value});
     }, 
     handleUserName:function(event){
-        console.log(event.target.value)
         this.setState({userName: event.target.value});
     }, 
     handlePasswd:function(event){
-        console.log(event.target.value)
         this.setState({passwd: event.target.value});
     }, 
     handlePasswdAgain:function(event){
-        console.log(event.target.value)
+//        console.log(event.target.value)
         this.setState({passwdAgain: event.target.value});
     }, 
     submit:function(e){
-        console.log(this.state)
         e.preventDefault();
         this.setState({errorMessage:"",showError:0})
         
@@ -77,7 +73,6 @@ let component=React.createClass({
                 passwd:this.state.passwd,                
             }
             $.post("/pipe/signin",data2post,function(data){
-                console.log(typeof data);
                 data=JSON.parse(data);
                 if(data.code==0){
                     common.changePage("chat");
@@ -96,7 +91,6 @@ let component=React.createClass({
                 return;
             }
             $.post("/pipe/signup",data2post,function(data){
-                console.log(typeof data);
                 data=JSON.parse(data);
                 if(data.code==0){
                    common.changePage("chat");

@@ -1,0 +1,54 @@
+@import "variables.less";
+@import "common.less";
+.chat-Room-component {
+    @height: 50px;
+    height: @height;
+    position: relative;
+    &:hover{
+        >.round-close{
+            display: block;
+        }
+    }
+    .round-close {
+        display: none;
+        background-color: transparent;
+        font-size: 10px;
+        .abs-fill;
+        right: auto;
+        left: 3px;  
+        @size:12px;
+        border-radius: 100px;
+        text-align: center;
+        line-height: @size;
+        .square(@size);
+        vertical-align: middle;
+        cursor: pointer;
+//        background-color:  rgb(159,159,159);
+        &:hover{
+            background-color:  rgb(159,159,159);
+            color: white;
+        }
+        
+    }
+    .icon {
+        position: absolute;
+        .square(@height*0.7);
+        border-radius: 100px;
+        overflow: hidden;
+        background-color: white;
+        .abs-fill;
+        left: 15px;
+        right: auto;
+        .icon-img {
+            .fill;
+        }
+    }
+    .name {
+        position: absolute;
+        left: 54px;
+        line-height: @height;
+        font-weight: normal;
+        font-size: 12px;
+    }
+    .message-cnt {}
+}

@@ -1,32 +1,37 @@
-let Provider=ReactRedux.Provider;
-let Root=React.createClass({
-    getInitialState:function(){
-        let rootStore=(state={},action)=>{              
-            switch(action.type){
-                case "setHeadState":
-//                    this.state.headState=action.state;
-//                    this.setState()
-                    return Object.assign({},state,{headState:action.state})
-                    break;
-                case "setChatTab":
-                    console.log(action.name)
-                    return Object.assign({},state,{chatTab:action.name})
-                    break;
+let Provider = ReactRedux.Provider;
+let Root = React.createClass({
+    getInitialState: function () {
+        let rootStore = (state = {
+            chatTab: "recent",
+            rootList:{
+                recent:[],
+                friend:[],
+                group:[],
+            }
+        }, action) => {
+            switch (action.type) {
+            case "initChatRooms":
+                break;
+            case "setHeadState":
+                return Object.assign({}, state, {
+                    headState: action.state
+                })
+                break;
+            case "setChatTab":
+                return Object.assign({}, state, {
+                    chatTab: action.name
+                })
+                break;
             }
             return state;
         }
         let store = Redux.createStore(rootStore);
-
-//        store.subscribe(function(){
-//            this.setState({
-//                headState:store.getState().headState
-//            });
-//            console.log(store.getState().headState)
-//
-//        })
-        return {store,headState:"offline"};
+        
+        return {
+            store, headState: "offline"
+        };
     },
-    render:function(){
+    render: function () {
         return (
             <Provider store={this.state.store}>
             
@@ -47,13 +52,11 @@ let Root=React.createClass({
                 
                 
             </div>  
-            </Provider>            
+            </Provider>
         );
     }
 });
 ReactDOM.render(
-  <Root/>, 
-  $("#wrap")[0]
+    <Root/>,
+    $("#wrap")[0]
 );
-
-

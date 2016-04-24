@@ -39,6 +39,17 @@ app.post('/pipe/signin', function (req, res) {
         res.send(JSON.stringify(result));
     }, res)
 })
+app.post('/pipe/getRoom', function (req, res) {
+    res.status(200);
+    let result={
+        recent:[
+            {name:"common",icon:{url:"/icon.png"},index:0}
+        ],
+        friend:[],
+        group:[]
+    }
+    res.send(JSON.stringify(result));
+})
 app.post('/pipe/signup', function (req, res) {
     account.register(req.body, function (info) {
         if (!info.code) {

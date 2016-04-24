@@ -1,5 +1,5 @@
 const mapStateToProps = (state) => {
-    console.log(state);
+//    console.log(state);
     return {state:state.headState,currentTab:state.chatTab}
 }
 const mapDispatchToProps = function(dispatch) {
@@ -12,6 +12,7 @@ const mapDispatchToProps = function(dispatch) {
 
 let component = React.createClass({
     getInitialState: function() {
+
         return {};
     },
 //    setChatTab:function(name){
@@ -35,9 +36,9 @@ let component = React.createClass({
             </div>
         ); 
     },
-    getDefaultProps:function(){
-      return {currentTab:"recent"}
-    },
+//    getDefaultProps:function(){
+//      return {currentTab:"recent"}
+//    },
 //    propTypes:{
 //        
 //    },
