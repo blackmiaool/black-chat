@@ -5,15 +5,22 @@ const mapStateToProps = (state) => {
     }
 }
 const mapDispatchToProps = function (dispatch) {
-    return {}
+    return {
+        setRoom:function(room){
+            dispatch({type:"setRoom",room})
+        }
+    }
 }
 let component = React.createClass({
     getInitialState: function () {
         let stateStore = function (state={}, action) {
-            console.log(state)
             switch (action.type) {
                 case "setRoom":
-                    this.setState({currentRoom:action.index});
+                this.setState({currentRoom:action.room});
+                    this.props.setRoom(action.room)
+//                    for(var i in this.state.roomList){
+//                        roomList[i];
+//                    }
                     break;
             } 
         }.bind(this)
@@ -21,15 +28,12 @@ let component = React.createClass({
         let store = Redux.createStore(stateStore);
         $.post("/pipe/getRoom", function (data) {
             data = JSON.parse(data);
-            this.setState({rootList:data});
-            
-            console.log(this.props.chatTab);
-            console.log(data);
-//            this.state.store.dispatch({type:"setRoom",index:0})
+            this.setState({roomList:data});
+            this.state.store.dispatch({type:"setRoom",room:this.state.roomList.recent[0]})
         }.bind(this))
         return {
             store,
-            rootList:{
+            roomList:{
                 recent:[],
                 friend:[],
                 group:[],
@@ -53,8 +57,8 @@ let component = React.createClass({
                 
             </div>
             <div className="body">                
-            {this.state.rootList[this.props.chatTab].map(function(room,i){
-                    return <Room icon={room.icon} name={room.name} key={i} checked={_this.state.currentRoom==room.index}/>
+            {this.state.roomList[this.props.chatTab].map(function(room,i){
+                    return <Room icon={room.icon} name={room.name} key={i} index={i} room={room}  checked={_this.state.currentRoom==room}/>
                 })}
             </div>
             </div>

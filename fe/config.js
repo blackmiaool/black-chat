@@ -15,7 +15,7 @@ let pageConfig = { //0:reference 1:Presentational 2 or obj:container
         "common/CommonHeader": 0,
         LeftHeader: 1,
         RoomList: {
-            Room:1
+            Room: 1
         },
         RootMain: {
             Title: 1,
@@ -122,8 +122,8 @@ function componentsHandle(target_functions) {
             let head = "";
             let foot;
             let modHead = "/dist/js";
-            let extraParams = ["'common'"];
-            let extraVars = ["common"];
+            let extraParams = ["'common'", "'react'", "'react-redux'", "'react-dom'", "'redux'"];
+            let extraVars = ["common", "React", "ReactRedux", "ReactDOM", "Redux"];
             let params = [];
             let vars = [];
             deps.forEach(function (name, i) {

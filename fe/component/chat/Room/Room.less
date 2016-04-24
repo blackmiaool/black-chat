@@ -4,12 +4,16 @@
     @height: 50px;
     height: @height;
     position: relative;
+    &[data-checked="true"]{
+        background-color: rgb(220,220,220);
+    }
     &:hover{
         >.round-close{
             display: block;
         }
     }
     .round-close {
+        color: #555;
         display: none;
         background-color: transparent;
         font-size: 10px;
