@@ -23,7 +23,7 @@ let pageConfig = { //0:reference 1:Presentational 2 or obj:container
             Tools: 1,
             Input: 1,
             Members: 1,
-            Annunciator: 1,
+            Bulletin: 1,
         },
     },
     login: {

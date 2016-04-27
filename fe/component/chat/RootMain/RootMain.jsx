@@ -74,8 +74,12 @@ let component = React.createClass({
                     <Input store={this.state.store} submit={this.sendMessage}/>
                    </div>           
                    <div className="right">
+                     <div className="Bulletin-wrap">
+                         <Bulletin/>
+                     </div>
+                      
                        <Members/>
-                        <Annunciator/>
+                        
                    </div>                    
             </div>
             </Provider>

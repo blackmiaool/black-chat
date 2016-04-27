@@ -43,7 +43,7 @@ app.post('/pipe/getRoom', function (req, res) {
     res.status(200);
     let result={
         recent:[
-            {name:"common",icon:{url:"/icon.png"},index:0},
+            {name:"common",icon:{url:"/icon.png"},index:0,bulletin:"测试用房间"},
             {name:"common2",icon:{url:"/icon.png"},index:1}
         ],
         friend:[],

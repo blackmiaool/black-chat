@@ -3,6 +3,7 @@ let Root = React.createClass({
     getInitialState: function () {
         let rootStore = (state = {
             chatTab: "recent",
+            currentRoom:{},
             rootList:{
                 recent:[],
                 friend:[],
@@ -21,6 +22,11 @@ let Root = React.createClass({
                 return Object.assign({}, state, {
                     chatTab: action.name
                 })
+                break;
+            case "setRoom":
+                return Object.assign({}, state, {
+                    currentRoom: action.room
+                })   
                 break;
             }
             return state;
