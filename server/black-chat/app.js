@@ -41,13 +41,48 @@ app.post('/pipe/signin', function (req, res) {
 })
 app.post('/pipe/getRoom', function (req, res) {
     res.status(200);
-    let result={
-        recent:[
-            {name:"common",icon:{url:"/icon.png"},index:0,bulletin:"测试用房间"},
-            {name:"common2",icon:{url:"/icon.png"},index:1}
+    let result = {
+        recent: [
+            {
+                name: "common",
+                icon: {
+                    url: "/icon.png"
+                },
+                index: 0,
+                bulletin: "测试用房间",
+                members: [
+                    {
+                        icon:"/icon.png",
+                        name:"blackmiaool",
+                        job:"creator",
+                    },
+                    {
+                        icon:"/icon.png",
+                        name:"b1",
+                        job:"admin",
+                    },
+                    {
+                        icon:"/icon.png",
+                        name:"b2",                     
+                    },
+
+            ],
+            },
+            {
+                name: "common2",
+                icon: {
+                    url: "/icon.png"
+                },
+                index: 1,
+                bulletin:"",
+                members:[{
+                        icon:"/icon.png",
+                        name:"b2",                     
+                    }],
+            }
         ],
-        friend:[],
-        group:[]
+        friend: [],
+        group: []
     }
     res.send(JSON.stringify(result));
 })

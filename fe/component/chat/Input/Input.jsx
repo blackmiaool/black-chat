@@ -1,4 +1,16 @@
-let Provider=ReactRedux.Provider;
+const mapStateToProps = (state) => {
+    return {}
+}
+const mapDispatchToProps = function(dispatch) {
+    return {
+        submit:function(text){
+            dispatch({
+                type:"sendMessage",
+                text
+            })
+        }
+    }
+}
 let component=React.createClass({
     getInitialState:function(){
          return {
@@ -14,13 +26,10 @@ let component=React.createClass({
             text: event.target.value
         });
     },
-    submit: function() {                      
-        this.props.submit({text:this.state.text});        
-    },
     keyHandle:function(event){                
         if((event.ctrlKey&&event.key==="Enter")||
            (event.altKey&&event.keyCode===83)){//ctrl+enter and alt+s 
-            this.props.submit({text:this.state.text});
+            this.props.submit(this.state.text);
         }
     },
     render:function(){
@@ -28,7 +37,7 @@ let component=React.createClass({
             <div className="chat-Input-component component">
                   <textarea className="input" name="" cols="30" rows="10" value={this.state.text} onChange={this.update} onKeyDown={this.keyHandle}></textarea>
                 <div className="send-wrap">
-                <button className="send clickable unselectable" onClick={this.submit}>
+                <button className="send clickable unselectable" onClick={this.props.submit.bind(this,this.state.text)}>
                 发送&#40;<span className="underline">s</span>&#41;
                 </button> 
 
@@ -69,5 +78,6 @@ let component=React.createClass({
 //        
 //    }    
 });
+component=ReactRedux.connect(mapStateToProps,mapDispatchToProps)(component);
 return component;
 

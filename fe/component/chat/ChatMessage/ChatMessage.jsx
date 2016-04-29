@@ -1,4 +1,5 @@
-let Provider=ReactRedux.Provider;
+//let Provider=ReactRedux.Provider;
+
 let component=React.createClass({
     getInitialState:function(){
         return {
@@ -6,7 +7,7 @@ let component=React.createClass({
     },
     handleMessage:function(messages){
         return messages.map((v,i)=>{
-            return <div key={i} className="message">{v}</div>                        
+            return <div key={i} className="message">{v.text}</div>                        
         });
     },
     render: function() {
@@ -50,5 +51,6 @@ let component=React.createClass({
 //        
 //    }    
 });
+//component=ReactRedux.connect(mapStateToProps,mapDispatchToProps)(component);
 return component;
 

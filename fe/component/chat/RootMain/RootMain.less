@@ -24,11 +24,16 @@
         left: auto;
         width: @right-width;
         border-left: 1px #ccc solid;
+        @bulletin-height:150px;;
         .Bulletin-wrap{
 //            width: 100%;
-            height: 150px;
+            height: @bulletin-height;
             margin: 0 10px;
             border-bottom: 1px solid #ccc;
+        }
+        .members-wrap{
+            .abs-fill;           
+            margin-top: @bulletin-height;
         }
     }
 }

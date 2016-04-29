@@ -17,14 +17,13 @@ let pageConfig = { //0:reference 1:Presentational 2 or obj:container
         RoomList: {
             Room: 1
         },
-        RootMain: {
-            Title: 1,
-            ChatMessage: 1,
-            Tools: 1,
-            Input: 1,
-            Members: 1,
-            Bulletin: 1,
-        },
+        Title: 1,
+        ChatMessage: 1,
+        Tools: 1,
+        Input: 1,
+        Members: 1,
+        Bulletin: 1,
+
     },
     login: {
         "common/CommonHeader": 0,

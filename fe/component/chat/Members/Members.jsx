@@ -11,6 +11,7 @@ let component = React.createClass({
     render: function() {
         return (
             <div className="chat-Members-component component">
+                <div className="title">Members <span className="cnt"></span></div>
             </div>
         );
     },
