@@ -29,7 +29,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use("/", express.static(path.join(__dirname, '../../fe/')));
 app.get(/^\/\w+\/?$/, function (req, res) {
-    account.check(req, res);
+    if (!account.check(req.signedCookies.userName, req.signedCookies.token)) {
+        res.clearCookie("userName");
+        res.clearCookie("userNameJs");
+        res.clearCookie("token");
+    }
     res.sendfile(path.join(__dirname, '../../fe/index.html')); // load our public/index.html file
 });
 app.post('/pipe/signin', function (req, res) {
@@ -52,18 +56,18 @@ app.post('/pipe/getRoom', function (req, res) {
                 bulletin: "测试用房间",
                 members: [
                     {
-                        icon:"/icon.png",
-                        name:"blackmiaool",
-                        job:"creator",
+                        icon: "/icon.png",
+                        name: "blackmiaool",
+                        job: "creator",
                     },
                     {
-                        icon:"/icon.png",
-                        name:"b1",
-                        job:"admin",
+                        icon: "/icon.png",
+                        name: "b1",
+                        job: "admin",
                     },
                     {
-                        icon:"/icon.png",
-                        name:"b2",                     
+                        icon: "/icon.png",
+                        name: "b2",
                     },
 
             ],
@@ -74,10 +78,10 @@ app.post('/pipe/getRoom', function (req, res) {
                     url: "/icon.png"
                 },
                 index: 1,
-                bulletin:"",
-                members:[{
-                        icon:"/icon.png",
-                        name:"b2",                     
+                bulletin: "",
+                members: [{
+                    icon: "/icon.png",
+                    name: "b2",
                     }],
             }
         ],

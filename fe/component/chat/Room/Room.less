@@ -4,6 +4,8 @@
     @height: 50px;
     height: @height;
     position: relative;
+    .unselectable;
+    cursor:default !important;
     &[data-checked="true"]{
         background-color: rgb(220,220,220);
     }
@@ -48,6 +50,7 @@
         }
     }
     .name {
+        cursor: inherit;
         position: absolute;
         left: 54px;
         line-height: @height;

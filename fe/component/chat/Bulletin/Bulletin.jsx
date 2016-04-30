@@ -1,5 +1,7 @@
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        content:state.currentRoom.bulletin
+    }
 }
 const mapDispatchToProps = function(dispatch) {
     return {}
@@ -13,7 +15,7 @@ let component = React.createClass({
             <div className="chat-Bulletin-component component">
                 <span className="title">Bulletin</span>
                 <span className="edit-icon glyphicon glyphicon-wrench" title="管理员才能修改公告"/>
-                <p className="content"></p>
+                <p className="content">{this.props.content}</p>
             </div>
         );
     },

@@ -97,23 +97,23 @@ let Root = React.createClass({
                     <RoomList/>  
                 </div>
                 <div className="right">
-                        <div className="top">
+                    <div className="top">
                         <Title/>   
-                        </div>
+                    </div>
 
-                        <div className="left">
-                            <ChatMessage message={this.state.message}/>
-                            <Tools/>
-                            <Input store={this.state.store}/>
-                        </div>           
-                        <div className="right">
-                            <div className="Bulletin-wrap">
-                               <Bulletin/>
-                            </div>
-                            <div className="members-wrap">
-                                <Members/>                            
-                            </div>                                          
-                        </div>                    
+                    <div className="left">
+                        <ChatMessage message={this.state.message}/>
+                        <Tools/>
+                        <Input store={this.state.store}/>
+                    </div>           
+                    <div className="right">
+                        <div className="Bulletin-wrap">
+                           <Bulletin/>
+                        </div>
+                        <div className="members-wrap">
+                            <Members/>                            
+                        </div>                                          
+                    </div>                    
                 </div>                                          
             </div>  
             </Provider>

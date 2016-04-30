@@ -2,9 +2,14 @@
 var express = require('express');
 var path = require('path');
 let url = require('url')
+let cookieParser = require('cookie-parser')
+let cookie = require('cookie');
+let io = require("./io.js");
+let account = require('./account.js');
 
 let Chat = function (server) {
     let WebSocket = require("ws")
+    
     var WebSocketServer = require("ws").Server;
 
     var wsserver = new WebSocketServer({
@@ -14,7 +19,31 @@ let Chat = function (server) {
     let wss = [];
     console.log(WebSocket.CONNECTING, WebSocket.OPEN, WebSocket.CLOSING, WebSocket.CLOSED)
     wsserver.on('connection', function (ws) {
-        console.log("connected")
+        if(!ws.upgradeReq.headers.cookie)
+            return;
+       var cookiesRaw = cookie.parse(ws.upgradeReq.headers.cookie);
+        console.log(cookiesRaw);
+        let cookies={};
+        for(var i in cookiesRaw){
+           let cookie=cookieParser.signedCookie(cookiesRaw[i],"m5345sdpymvkffglgmkg3453453453453453yeygh34gfwsrfgdvbllllhygmvyug");
+            if(cookie!=cookiesRaw[i])
+            cookies[i]=cookie;
+        } 
+        for(var i in ws){
+            console.log(i);
+        }
+        if(cookies.userName&&cookies.token){
+            if(account.check(cookies.userName,cookies.token)){
+                
+            }else{
+                ws.close();
+                return;
+            }
+        }else{
+            ws.close();
+            return;
+        }
+        console.log(cookies);
         ws.interval = setInterval(() => {
             console.log("interval", ws.readyState)
             if (ws.readyState == WebSocket.OPEN) {

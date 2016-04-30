@@ -1,13 +1,39 @@
 @import "variables.less";
 @import "common.less";
-.chat-Members-component{
+.chat-Members-component {
     .fill;
-    .title{
-        padding: 10px;
+    padding: 10px;
+    .title {
         font-size: 14px;
         color: #333;
-        .cnt{
-            
+        .cnt {}
+        margin-bottom: 10px;
+    }
+    .members {
+        .member {
+            position: relative;
+            .avatar-wrap {
+                .square(30px);
+                .round;
+                vertical-align: middle;
+                background-color: white;
+                display: inline-block;
+                .avatar {
+                    .fill;
+                    vertical-align: top;
+                    width: 100%;
+                }
+            }
+            line-height: 30px;
+            vertical-align: middle;
+            .name {
+                font-size: 10px;
+                width: 65px;                
+                display: inline-block;
+                word-break: break-all;
+                line-height: 20px;
+                vertical-align:middle;
+            }
         }
     }
 }

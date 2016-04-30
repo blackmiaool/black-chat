@@ -48,19 +48,19 @@ let component = React.createClass({
         return (            
             <Provider  store={this.state.store}>
             <div className="chat-RoomList-component component">
-            <div className="header">
-               <div className="input-wrap">
-                 
-                  <input type="text" onChange={this.handleChangeSearch} value={this.state.search}/> 
-                  <span className="glyphicon glyphicon-search"></span>
-               </div>
-                
-            </div>
-            <div className="body">                
-            {this.state.roomList[this.props.chatTab].map(function(room,i){
-                    return <Room icon={room.icon} name={room.name} key={i} index={i} room={room}  checked={_this.state.currentRoom==room}/>
-                })}
-            </div>
+                <div className="header">
+                   <div className="input-wrap">
+
+                      <input type="text" onChange={this.handleChangeSearch} value={this.state.search}/> 
+                      <span className="glyphicon glyphicon-search"></span>
+                   </div>
+
+                </div>
+                <div className="body">                
+                {this.state.roomList[this.props.chatTab].map(function(room,i){
+                        return <Room icon={room.icon} name={room.name} key={i} index={i} room={room}  checked={_this.state.currentRoom==room}/>
+                    })}
+                </div>
             </div>
             </Provider>
         );

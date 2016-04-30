@@ -125,15 +125,15 @@ function register(data, cb) {
 }
 
 module.exports = {
-    check: function (req, res) {
-        if (!accounts[req.signedCookies.userName]) {
-            return;
+    check: function (userName, token) {
+        if (!accounts[userName]) {
+            
+            return false;
         }
-        if (accounts[req.signedCookies.userName].token != req.signedCookies.token) {
-            res.clearCookie("userName");
-            res.clearCookie("userNameJs");
-            res.clearCookie("token");
+        if (accounts[userName].token != token) {
+            return false;
         }
+        return true;
     },
     login,
     register,

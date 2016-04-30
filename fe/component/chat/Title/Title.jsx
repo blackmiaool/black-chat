@@ -1,4 +1,13 @@
 let Provider=ReactRedux.Provider;
+const mapStateToProps = (state) => {
+    return {
+        title:state.currentRoom.name
+    }
+}
+const mapDispatchToProps = function (dispatch) {
+    return {
+    }
+}
 let component=React.createClass({
     getInitialState:function(){
         return {
@@ -7,6 +16,7 @@ let component=React.createClass({
     render:function(){
         return (
             <div className="chat-Title-component component">
+            <h4 className="title">{this.props.title}</h4>
             </div>
         );
     },
@@ -42,5 +52,6 @@ let component=React.createClass({
 //        
 //    }    
 });
+component = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(component);
 return component;
 
