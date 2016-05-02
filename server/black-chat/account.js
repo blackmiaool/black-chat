@@ -126,14 +126,14 @@ function register(data, cb) {
 
 module.exports = {
     check: function (userName, token) {
-        if (!accounts[userName]) {
-            
+        let usr=accounts[userName];
+        if (!usr) {            
             return false;
         }
-        if (accounts[userName].token != token) {
+        if (usr.token != token) {
             return false;
         }
-        return true;
+        return usr;
     },
     login,
     register,

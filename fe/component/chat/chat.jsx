@@ -4,7 +4,7 @@ let Root = React.createClass({
         this.socket = new WebSocket(`ws://${location.host}/pipe/submit`);
         let socket = this.socket;
         socket.onopen = (event) => {
-            console.log("onopen")
+            
             this.state.store.dispatch({
                 type: "setHeadState",
                 state: "online",
@@ -33,26 +33,21 @@ let Root = React.createClass({
     
     getInitialState: function () {
         let rootStore = (state = {
-            chatTab: "recent",
+            current: "recent",
             currentRoom: {},
-            rootList: {
-                recent: [],
-                friend: [],
-                group: [],
-            },
+            rootList: [],
         }, action) => {
             switch (action.type) {
             case "initChatRooms":
                 break;
-            case "setHeadState":
-                console.log("s", action.state)
+            case "setHeadState":              
                 return Object.assign({}, state, {
                     headState: action.state
                 })
                 break;
-            case "setChatTab":
+            case "setCurrentTab":
                 return Object.assign({}, state, {
-                    chatTab: action.name
+                    current: action.name
                 })
                 break;
             case "setRoom":

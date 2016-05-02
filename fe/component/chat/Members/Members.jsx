@@ -1,11 +1,12 @@
 const mapStateToProps = (state) => {
     return {
-        members: state.currentRoom.members||[],
+        members: state.currentRoom.members||{},
     }
 }
 const mapDispatchToProps = function (dispatch) {
     return {}
 }
+
 let component = React.createClass({
     getInitialState: function () {
         return {};
@@ -13,17 +14,19 @@ let component = React.createClass({
     render: function () {
         return (
             <div className="chat-Members-component component">
-                <div className="title">Members <span className="cnt"></span></div>
+                <div className="title">Members 
+                    <span className="cnt"></span>
+                </div>
                 <div className="members">
-                    {this.props.members.map(function(v,i){
+                    {_.map(this.props.members,(function(v,i){
                         return (
-                            <div className="member" key={i}>
-                                <div className="avatar-wrap">
-                                    <img src={v.icon} alt="User avatar" className="avatar"/>                                
-                                </div>
-                                <span className="name" title={v.name}>{v.name}</span> 
-                            </div>)
-                    })} 
+                    <div className="member" key={i}>
+                        <div className="avatar-wrap">
+                            <img src={v.icon} alt="User avatar" className="avatar"/>                                
+                        </div>
+                        <span className="name" title={v.name}>{v.name}</span> 
+                    </div>)
+                    }))} 
                 </div>
                                               
             </div>

@@ -8,6 +8,7 @@ let requirejsConfig={
         "react-redux":'react-redux',
         "react-dom":'react-dom',
         md5:'md5',
+        underscore:"underscore",
     }
 };
 let pages=["chat","login","logout"];

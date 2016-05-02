@@ -1,7 +1,8 @@
 let Provider=ReactRedux.Provider;
 const mapStateToProps = (state) => {
     return {
-        title:state.currentRoom.name
+        title:state.currentRoom.name,
+        uid:state.currentRoom.uid        
     }
 }
 const mapDispatchToProps = function (dispatch) {
@@ -16,7 +17,7 @@ let component=React.createClass({
     render:function(){
         return (
             <div className="chat-Title-component component">
-            <h4 className="title">{this.props.title}</h4>
+            <h4 className="title">{this.props.title}({this.props.uid})</h4>
             </div>
         );
     },

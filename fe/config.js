@@ -121,8 +121,8 @@ function componentsHandle(target_functions) {
             let head = "";
             let foot;
             let modHead = "/dist/js";
-            let extraParams = ["'common'", "'react'", "'react-redux'", "'react-dom'", "'redux'"];
-            let extraVars = ["common", "React", "ReactRedux", "ReactDOM", "Redux"];
+            let extraParams = ["'common'", "'react'", "'react-redux'", "'react-dom'", "'redux'","'underscore'"];
+            let extraVars = ["common", "React", "ReactRedux", "ReactDOM", "Redux","_"];
             let params = [];
             let vars = [];
             deps.forEach(function (name, i) {

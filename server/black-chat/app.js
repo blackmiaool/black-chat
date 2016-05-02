@@ -8,10 +8,11 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
+let chat=require("./chat.js")
 var app = express();
 let account = require('./account.js');
-var cookieParser = require('cookie-parser')
+var cookieParser = require('cookie-parser');
+let info=require("./info.js")
 app.use(cookieParser("m5345sdpymvkffglgmkg3453453453453453yeygh34gfwsrfgdvbllllhygmvyug"));
 // view engine setup3
 app.set('views', path.join(__dirname, 'views'));
@@ -45,50 +46,22 @@ app.post('/pipe/signin', function (req, res) {
 })
 app.post('/pipe/getRoom', function (req, res) {
     res.status(200);
-    let result = {
-        recent: [
-            {
-                name: "common",
-                icon: {
-                    url: "/icon.png"
-                },
-                index: 0,
-                bulletin: "测试用房间",
-                members: [
-                    {
-                        icon: "/icon.png",
-                        name: "blackmiaool",
-                        job: "creator",
-                    },
-                    {
-                        icon: "/icon.png",
-                        name: "b1",
-                        job: "admin",
-                    },
-                    {
-                        icon: "/icon.png",
-                        name: "b2",
-                    },
+//    let result = {
+//        recent: chat.rooms,
+//        friend: [],
+//        group: []
+//    }
+    let rooms=JSON.parse(JSON.stringify(info.getUserRooms()));
 
-            ],
-            },
-            {
-                name: "common2",
-                icon: {
-                    url: "/icon.png"
-                },
-                index: 1,
-                bulletin: "",
-                members: [{
-                    icon: "/icon.png",
-                    name: "b2",
-                    }],
-            }
-        ],
-        friend: [],
-        group: []
-    }
-    res.send(JSON.stringify(result));
+        rooms=rooms.map(function(v,i,a){
+            
+            return v.profile;
+        })
+    
+//    let result=info.getUserRooms().map(function(v,i){
+//        return v.profile;
+//    });
+    res.send(JSON.stringify(rooms));
 })
 app.post('/pipe/signup', function (req, res) {
     account.register(req.body, function (info) {
