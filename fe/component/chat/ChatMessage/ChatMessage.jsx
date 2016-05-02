@@ -2,20 +2,38 @@
 
 let component=React.createClass({
     getInitialState:function(){
+        this.user=common.getCookie("userNameJs");
         return {
         };
     },
-    handleMessage:function(messages){
+    handleMessage:function(messages=[]){
+        console.log(messages)
         return messages.map((v,i)=>{
-            return <div key={i} className="message">{v.text}</div>                        
+            return (
+                <div key={i} className="message" data-role={v.user.name==this.user}>
+                   <div className="icon">
+                       <img src={v.user.icon} alt=""/>
+                   </div>
+                   <h4 className="name">
+                       {v.user.name}
+                   </h4>
+                   <div className="content-wrap-wrap">
+                       <span className="content-wrap">
+                           <span className="content">
+                               {v.text}
+                           </span>
+                       </span> 
+                   </div>
+                                      
+                </div>  );                      
         });
     },
     render: function() {
         return (
             <div className="Chat-area">
-            <div className="message-wrap">
-                {this.handleMessage(this.props.message)}
-            </div>                
+                <div className="message-wrap">
+                    {this.handleMessage(this.props.message)}
+                </div>                
             </div>
         );
     },

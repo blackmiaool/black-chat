@@ -8,4 +8,87 @@
     top: 0;
     left: 0;
     overflow: auto;
+    padding: 7px;
+    .message-wrap {
+        .message {
+            @blue: rgb(212, 237, 244);
+            position: relative;
+            margin-bottom: 10px;
+            &[data-role="true"] {
+                .icon {
+                    right: 0;
+                    left: auto;
+                }
+                .name {
+                    text-align: right;
+                }
+                .content-wrap-wrap {
+                    text-align: right;
+                    .content-wrap {
+                        @grey: rgb(230, 230, 230);
+                        background-color: @grey;
+                        &::before {
+                            position: absolute;
+                            right: -5px;
+                            left: auto;
+                            top: 2px;
+                            border-left-color: transparent;
+                            border-right-color: @grey;
+                            .transform(rotate(45deg));
+                        }
+                        .content {}
+                    }
+                }
+            }
+            .icon {
+                position: absolute;
+                left: 0;
+                top: 0;
+                .round;
+                .square(30px);
+                img {
+                    .fill;
+                }
+            }
+            .name {
+                color: rgb(89, 89, 89);
+                font-weight: normal;
+                font-size: 12px;
+                margin: 0px;
+                margin-left: 40px;
+                margin-right: 40px;
+                padding-top: 3px;
+                margin-bottom: 3px;
+            }
+            .content-wrap-wrap {
+                .content-wrap {
+                    margin-left: 35px;
+                    margin-right: 40px;
+                    display: inline-block;
+                    background-color: @blue;
+                    padding: 10px 15px;
+                    border-radius: 8px;
+                    position: relative;
+                    &::before {
+                        box-sizing: content-box;
+                        height: 0;
+                        width: 0;
+                        content: "";
+                        border: 5px transparent solid;
+                        border-left-color: @blue;
+                        font-size: 0px;
+                        display: inline-block;
+                        .transform(rotate(-45deg));
+                        position: absolute;
+                        left: -5px;
+                        top: 2px;
+                    }
+                    .content {
+                        font-size: 15px;
+                        word-break: break-all;
+                    }
+                }
+            }
+        }
+    }
 }

@@ -8,11 +8,11 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-let chat=require("./chat.js")
+let chat = require("./chat.js")
 var app = express();
 let account = require('./account.js');
 var cookieParser = require('cookie-parser');
-let info=require("./info.js")
+let info = require("./info.js")
 app.use(cookieParser("m5345sdpymvkffglgmkg3453453453453453yeygh34gfwsrfgdvbllllhygmvyug"));
 // view engine setup3
 app.set('views', path.join(__dirname, 'views'));
@@ -46,22 +46,22 @@ app.post('/pipe/signin', function (req, res) {
 })
 app.post('/pipe/getRoom', function (req, res) {
     res.status(200);
-//    let result = {
-//        recent: chat.rooms,
-//        friend: [],
-//        group: []
-//    }
-    let rooms=JSON.parse(JSON.stringify(info.getUserRooms()));
+    //    let result = {
+    //        recent: chat.rooms,
+    //        friend: [],
+    //        group: []
+    //    }
+    let rooms = info.getUserRooms();
 
-        rooms=rooms.map(function(v,i,a){
-            
-            return v.profile;
-        })
-    
-//    let result=info.getUserRooms().map(function(v,i){
-//        return v.profile;
-//    });
-    res.send(JSON.stringify(rooms));
+    let rooms2 = rooms.map(function (v, i, a) {
+        console.log(v.__proto__)
+        return v.profile;
+    })
+
+    //    let result=info.getUserRooms().map(function(v,i){
+    //        return v.profile;
+    //    });
+    res.send(JSON.stringify(rooms2));
 })
 app.post('/pipe/signup', function (req, res) {
     account.register(req.body, function (info) {

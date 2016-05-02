@@ -4,7 +4,7 @@ let Root = React.createClass({
         this.socket = new WebSocket(`ws://${location.host}/pipe/submit`);
         let socket = this.socket;
         socket.onopen = (event) => {
-            
+
             this.state.store.dispatch({
                 type: "setHeadState",
                 state: "online",
@@ -14,7 +14,7 @@ let Root = React.createClass({
                     return;
                 this.state.store.dispatch({
                     type: "receiveMessage",
-                    text: event.data,
+                    data: JSON.parse(event.data),
                 });
                 //                message.push(event.data)
                 //                console.log(message); 
@@ -30,7 +30,7 @@ let Root = React.createClass({
             };
         };
     },
-    
+
     getInitialState: function () {
         let rootStore = (state = {
             current: "recent",
@@ -40,7 +40,7 @@ let Root = React.createClass({
             switch (action.type) {
             case "initChatRooms":
                 break;
-            case "setHeadState":              
+            case "setHeadState":
                 return Object.assign({}, state, {
                     headState: action.state
                 })
@@ -52,18 +52,28 @@ let Root = React.createClass({
                 break;
             case "setRoom":
                 console.log(action.room)
+                this.state.roomId=action.room.uid;
+                console.log("roomId",this.state.roomId)
+                this.setState(this.state)
                 return Object.assign({}, state, {
                     currentRoom: action.room
                 })
                 break;
             case "sendMessage":
                 console.log(action)
-                this.socket.send(action.text);
+                
+                this.socket.send(JSON.stringify({
+                    content: action.text,
+                    room: state.currentRoom.uid 
+                }));
                 break;
             case "receiveMessage":
-                this.state.message.push({text:action.text})
+                this.state.message[action.data.room].push({
+                    text: action.data.content,
+                    user:state.currentRoom.members[action.data.user]
+                })
                 this.setState({
-                    message:this.state.message
+                    message: this.state.message
                 })
                 return state;
             }
@@ -74,8 +84,9 @@ let Root = React.createClass({
         let store = Redux.createStore(rootStore);
 
         return {
-            message: [{text:"a"},{text:"b"} ],
-            store, headState: "offline"
+            message: [[]],
+            store,
+            headState: "offline"
         };
     },
     render: function () {
@@ -97,7 +108,7 @@ let Root = React.createClass({
                     </div>
 
                     <div className="left">
-                        <ChatMessage message={this.state.message}/>
+                        <ChatMessage message={this.state.message[this.state.roomId]}/>
                         <Tools/>
                         <Input store={this.state.store}/>
                     </div>           
