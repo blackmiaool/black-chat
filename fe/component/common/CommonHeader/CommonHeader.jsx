@@ -1,4 +1,12 @@
-let Provider = ReactRedux.Provider;
+import common from "../../../client/common.js"
+import React from "react";
+import {Provider,connect} from 'react-redux';
+import * as Redux from 'redux';
+//import _ from 'underscore';
+
+//require("css!less!./CommonHeader.less");
+var css = require("./CommonHeader.less");
+
 const mapStateToProps = function (state) {
     return {
 
@@ -24,6 +32,7 @@ let component = React.createClass({
         return {};
     },
     render: function () {
+        console.log(3334333)
         return (
             <div className="common-CommonHeader-component component">
                     <div className="center page-max-width">
@@ -89,5 +98,5 @@ let component = React.createClass({
     //        
     //    }    
 });
-component = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(component);
-return component;
+component = connect(mapStateToProps, mapDispatchToProps)(component);
+export default component;

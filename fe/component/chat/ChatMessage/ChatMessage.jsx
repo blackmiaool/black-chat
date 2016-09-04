@@ -7,7 +7,7 @@ let component=React.createClass({
         };
     },
     handleMessage:function(messages=[]){
-        console.log(messages)
+//        console.log(messages)
         return messages.map((v,i)=>{
             return (
                 <div key={i} className="message" data-role={v.user.name==this.user}>

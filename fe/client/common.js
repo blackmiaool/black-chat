@@ -1,4 +1,4 @@
-define("common", function () {
+//define("common", function () {
     let parseURL = url => {
         var a = document.createElement('a');
         a.href = url;
@@ -78,7 +78,7 @@ define("common", function () {
     let initPage = () => {
 
     };
-    let exports = {
+    export default {
         initPage,
         parseURL,
         args,
@@ -88,5 +88,5 @@ define("common", function () {
         delCookie,
         changePage,
     }
-    return exports;
-})
+    
+//})

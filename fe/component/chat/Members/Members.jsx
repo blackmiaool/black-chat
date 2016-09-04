@@ -26,7 +26,7 @@ let component = React.createClass({
                         </div>
                         <span className="name" title={v.name}>{v.name}</span> 
                     </div>)
-                    }))} 
+                    }).bind(this))} 
                 </div>
                                               
             </div>
