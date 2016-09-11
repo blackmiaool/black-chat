@@ -1,3 +1,6 @@
+import $ from "jquery";
+import {hashHistory} from 'react-router';
+
 //define("common", function () {
     let parseURL = url => {
         var a = document.createElement('a');
@@ -32,6 +35,10 @@
     }
     let url = parseURL(window.location.href);
     let args=url.params;
+
+    if(url.host==="localhost"){
+        $(document.body).append(`<script src="http://localhost:35729/livereload.js"></script>`);
+    }
     args.page = url.segments[0];
 
     function setCookie(c_name, value, expiredays) {
@@ -63,15 +70,17 @@
         argsStr=argsStr.join("&");
         let targetUrl;
         if(argsStr.length){
-            targetUrl = `${location.origin}/${page}?${argsStr}`;
+            targetUrl = `/${page}?${argsStr}`;
         }else{
-            targetUrl = `${location.origin}/${page}`;
+            targetUrl = `/${page}`;
         }
         
         if (replace) {
-            location.replace(targetUrl)
+            hashHistory.replace(targetUrl);
+//            location.replace(targetUrl)
         } else {
-            location.href = targetUrl;
+            hashHistory.push(targetUrl);
+//            location.href = targetUrl;
         }
 
     }

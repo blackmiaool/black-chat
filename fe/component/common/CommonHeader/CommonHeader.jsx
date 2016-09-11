@@ -6,6 +6,7 @@ import * as Redux from 'redux';
 
 //require("css!less!./CommonHeader.less");
 var css = require("./CommonHeader.less");
+import {hashHistory} from 'react-router';
 
 const mapStateToProps = function (state) {
     return {
@@ -16,11 +17,13 @@ const mapDispatchToProps = function (dispatch) {
     let sign;
     if (common.args.page == "login") {
         sign=function(mode){
-            dispatch({type:"setMode",mode})
+//            dispatch({type:"setMode",mode})
+            hashHistory.push('/login');
         }
     } else {
         sign=function(mode){
             common.changePage("login",{mode});
+//            hashHistory.push('/login');
         }
     }
     return {

@@ -1,9 +1,20 @@
-let Provider=ReactRedux.Provider;
+import common from "../../client/common.js"
+import React from "react";
+import {
+    Provider
+}
+from 'react-redux';
+import * as Redux from 'redux';
+import _ from 'underscore';
+import CommonHeader from "../common/CommonHeader/CommonHeader";
+
+import rootConfig from "../config.js";
+import LoginForm from "./LoginForm/LoginForm";
+import RegisterForm from "./RegisterForm/RegisterForm";
+var css = require("./login.less");
 let Root=React.createClass({
-    getInitialState:function(){
-        console.log(common.args.mode)
-        let rootStore=(state={mode:common.args.mode?common.args.mode:"signup"},action)=>{ 
-            console.log(state)
+    getInitialState:function(){        
+        let rootStore=(state={mode:common.args.mode?common.args.mode:"signup"},action)=>{             
             switch(action.type){
                 case "setMode"://signup or signin
 //                    state.mode=action.mode;
@@ -49,9 +60,6 @@ let Root=React.createClass({
         );
     }
 });
-ReactDOM.render(
-  <Root/>, 
-  $("#wrap")[0]
-);
 
+export default Root;
 

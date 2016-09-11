@@ -1,4 +1,9 @@
-let Provider=ReactRedux.Provider;
+import common from "../../../client/common.js"
+import React from "react";
+import {Provider,connect} from 'react-redux';
+import $ from "jquery";
+import rootConfig from "../../config.js"
+var css = require("./LoginForm.less");
 const mapStateToProps = function(state)  {
   return {
       mode:state.mode 
@@ -72,7 +77,7 @@ let component=React.createClass({
                 userName:this.state.userName,
                 passwd:this.state.passwd,                
             }
-            $.post("/pipe/signin",data2post,function(data){
+            $.post(rootConfig.url.signin,data2post,function(data){
                 data=JSON.parse(data);
                 if(data.code==0){
                     common.changePage("chat");
@@ -90,7 +95,7 @@ let component=React.createClass({
                 this.setState({errorMessage:"Password not same.",showError:1});
                 return;
             }
-            $.post("/pipe/signup",data2post,function(data){
+            $.post(rootConfig.url.signup,data2post,function(data){
                 data=JSON.parse(data);
                 if(data.code==0){
                    common.changePage("chat");
@@ -152,6 +157,6 @@ let component=React.createClass({
 //    }    
 });
 
-component=ReactRedux.connect(mapStateToProps,mapDispatchToProps)(component);
-return component;
+component=connect(mapStateToProps,mapDispatchToProps)(component);
+export default component;
 

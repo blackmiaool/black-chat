@@ -1,9 +1,10 @@
 import common from "../../../client/common.js"
 import React from "react";
 import {Provider,connect} from 'react-redux';
-import * as Redux from 'redux';
 import $ from "jquery"
 import Room from "../Room/Room"
+import rootConfig from "../../config.js"
+
 var css = require("./RoomList.less");
 const mapStateToProps = (state) => {    
     return {
@@ -22,7 +23,7 @@ const mapDispatchToProps = function (dispatch) {
 }
 let component = React.createClass({
     getRoom: function () {
-        $.post("//localhost:3000/pipe/getRoom", function (data) {
+        $.post(rootConfig.url.getRoom, function (data) {
             data = JSON.parse(data);
             this.setState({
                 roomList: data

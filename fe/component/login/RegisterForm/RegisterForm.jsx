@@ -1,4 +1,7 @@
-let Provider=ReactRedux.Provider;
+import common from "../../../client/common.js"
+import React from "react";
+import {Provider,connect} from 'react-redux';
+
 let component=React.createClass({
     getInitialState:function(){
         return {
@@ -42,5 +45,6 @@ let component=React.createClass({
 //        
 //    }    
 });
-return component;
+//component=connect(mapStateToProps,mapDispatchToProps)(component);
+export default component;
 

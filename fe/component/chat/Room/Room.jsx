@@ -1,7 +1,6 @@
 import common from "../../../client/common.js"
 import React from "react";
 import {Provider,connect} from 'react-redux';
-import * as Redux from 'redux';
 
 var css = require("./Room.less");
 const mapStateToProps = (state) => {

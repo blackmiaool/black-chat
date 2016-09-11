@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use("/", express.static(path.join(__dirname, '../../fe/')));
-app.get(/^\/\w+\/?$/, function (req, res) {
+app.get(/^\/\w+\/?$/, function(req, res) {
     if (!account.check(req.signedCookies.userName, req.signedCookies.token)) {
         res.clearCookie("userName");
         res.clearCookie("userNameJs");
@@ -37,14 +37,21 @@ app.get(/^\/\w+\/?$/, function (req, res) {
     }
     res.sendfile(path.join(__dirname, '../../fe/index.html')); // load our public/index.html file
 });
-app.post('/pipe/signin', function (req, res) {
+
+function setOrigin(res) {
+    res.set("Access-Control-Allow-Origin", "*")
+}
+app.post('/pipe/signin', function(req, res) {
+    setOrigin(res);
     //    res.cookie("test","123456",{signed:true})
-    account.login(req.body, function (result) {
+    account.login(req.body, function(result) {
         res.status(200);
         res.send(JSON.stringify(result));
     }, res)
+
 })
-app.post('/pipe/getRoom', function (req, res) {
+app.post('/pipe/getRoom', function(req, res) {
+    setOrigin(res);
     res.status(200);
     //    let result = {
     //        recent: chat.rooms,
@@ -53,21 +60,22 @@ app.post('/pipe/getRoom', function (req, res) {
     //    }
     let rooms = info.getUserRooms();
 
-    let rooms2 = rooms.map(function (v, i, a) {
+    let rooms2 = rooms.map(function(v, i, a) {
         console.log(v.__proto__)
         return v.profile;
     })
-    res.set("Access-Control-Allow-Origin", "*")
+
     //    let result=info.getUserRooms().map(function(v,i){
     //        return v.profile;
     //    });
     res.send(JSON.stringify(rooms2));
 })
-app.post('/pipe/signup', function (req, res) {
-    account.register(req.body, function (info) {
+app.post('/pipe/signup', function(req, res) {
+    setOrigin(res);
+    account.register(req.body, function(info) {
         if (!info.code) {
-            setTimeout(function () {
-                account.login(req.body, function (info2) {
+            setTimeout(function() {
+                account.login(req.body, function(info2) {
                     res.status(200);
                     res.send(JSON.stringify(info2));
                 }, res)
@@ -75,13 +83,14 @@ app.post('/pipe/signup', function (req, res) {
 
         } else {
             res.status(200);
+
             res.send(JSON.stringify(info));
         }
 
     });
 })
-app.post('/pipe/profile', function (req, res) {
-
+app.post('/pipe/profile', function(req, res) {
+        setOrigin(res);
     })
     //app.use("/chat/\w*",express.static(path.join(__dirname, '../../fe/')));
     //app.use('/', routes);
@@ -89,7 +98,7 @@ app.use('/users', users);
 
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
@@ -100,7 +109,7 @@ app.use(function (req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function (err, req, res, next) {
+    app.use(function(err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -111,7 +120,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,

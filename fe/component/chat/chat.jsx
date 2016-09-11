@@ -7,20 +7,20 @@ from 'react-redux';
 import * as Redux from 'redux';
 import _ from 'underscore';
 import CommonHeader from "../common/CommonHeader/CommonHeader";
-import LeftHeader from "../chat/LeftHeader/LeftHeader";
-import RoomList from "../chat/RoomList/RoomList";
-import Title from "../chat/Title/Title";
-import ChatMessage from "../chat/ChatMessage/ChatMessage";
-import Tools from "../chat/Tools/Tools";
-import Input from "../chat/Input/Input";
-import Bulletin from "../chat/Bulletin/Bulletin";
-import Members from "../chat/Members/Members";
+import LeftHeader from "./LeftHeader/LeftHeader";
+import RoomList from "./RoomList/RoomList";
+import Title from "./Title/Title";
+import ChatMessage from "./ChatMessage/ChatMessage";
+import Tools from "./Tools/Tools";
+import Input from "./Input/Input";
+import Bulletin from "./Bulletin/Bulletin";
+import Members from "./Members/Members";
 import rootConfig from "../config.js"
 
 let css = require("./chat.less");
 let Root = React.createClass({
     connectInit: function () {
-        //        this.socket = new WebSocket(`ws://${location.host}/pipe/submit`);
+
         let socket;
 
         let start = (websocketServerLocation) => {
@@ -52,7 +52,7 @@ let Root = React.createClass({
                 });
             };
         }
-        start(rootConfig.wsLocation);
+        start(rootConfig.url.ws);
 
     },
 

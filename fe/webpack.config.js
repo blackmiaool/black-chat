@@ -6,22 +6,17 @@ var APP_DIR = path.resolve(__dirname, 'client/');
 var COMPONENT_DIR = path.resolve(__dirname, 'component/');
 var LESS_DIR = path.resolve(__dirname, 'less/');
 
-
+var LiveReloadPlugin = require('webpack-livereload-plugin');
 
 
 var config = {
     entry: [
-        'webpack-dev-server/client?http://0.0.0.0:3003',
-        'webpack/hot/only-dev-server',
-//         'webpack/hot/dev-server',
         APP_DIR + '/index.jsx'
     ],
     output: {
         path: BUILD_DIR,
         filename: 'bundle.js',
         publicPath: '/',
-        hotUpdateChunkFilename: 'hot/hot-update.js',
-        hotUpdateMainFilename: 'hot/hot-update.json'
     },
     // module: {
     //     loaders: [{
@@ -47,7 +42,7 @@ var config = {
         extensions: ["", ".js", ".jsx", ".es6"]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new LiveReloadPlugin({})
     ]
 };
 module.exports = config;
