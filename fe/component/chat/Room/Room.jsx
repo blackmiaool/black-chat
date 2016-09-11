@@ -1,3 +1,9 @@
+import common from "../../../client/common.js"
+import React from "react";
+import {Provider,connect} from 'react-redux';
+import * as Redux from 'redux';
+
+var css = require("./Room.less");
 const mapStateToProps = (state) => {
     return {}
 }
@@ -10,13 +16,7 @@ const mapDispatchToProps = function (dispatch) {
 }
 let component = React.createClass({
     getInitialState: function () {
-        let stateStore = function (state, action) {
-            switch (action.type) {}
-        }
-
-        let store = Redux.createStore(stateStore);
         return {
-            store,
         };
     },
     render: function () {
@@ -61,5 +61,5 @@ let component = React.createClass({
     //        
     //    }    
 });
-component = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(component);
-return component;
+component=connect(mapStateToProps,mapDispatchToProps)(component);
+export default component;

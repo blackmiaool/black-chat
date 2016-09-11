@@ -1,8 +1,13 @@
 import React from 'react';
 import {render} from 'react-dom';
-import App2 from "./app2";
-import Root from "../component/chat"
+import Root from "../component/chat/chat"
 //console.log(chat)
+var css = require("../less/base.less");
+import {
+    Router,
+    Route,
+    hashHistory
+} from 'react-router'
 class App extends React.Component {
   render () {
     return <Root/>;

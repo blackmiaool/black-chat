@@ -1,3 +1,9 @@
+import common from "../../../client/common.js"
+import React from "react";
+import {Provider,connect} from 'react-redux';
+import * as Redux from 'redux';
+
+var css = require("./LeftHeader.less");
 const mapStateToProps = (state) => {
 //    console.log(state);
     return {state:state.headState,currentTab:state.current}
@@ -18,7 +24,7 @@ let component = React.createClass({
 
     render: function() {
         return (
-            <div className="chat-LeftHeader-component component">
+            <div data-component="chat-leftHeader" className=" component">
             <div className="avatar-area">
                 <div className="connection-state" data-state={this.props.state} title={this.props.state}>
                     
@@ -65,5 +71,5 @@ let component = React.createClass({
 //        
 //    }    
 });
-component=ReactRedux.connect(mapStateToProps,mapDispatchToProps)(component);
-return component;
+component=connect(mapStateToProps,mapDispatchToProps)(component);
+export default component;

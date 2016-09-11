@@ -1,15 +1,10 @@
-import common from "../../client/common.js"
-import React from "react";
-import {Provider} from 'react-redux';
-import * as Redux from 'redux';
-import _ from 'underscore';
-import CommonHeader from "../common/CommonHeader/CommonHeader"
+let Provider = ReactRedux.Provider;
 let Root = React.createClass({
     connectInit: function () {
         //        this.socket = new WebSocket(`ws://${location.host}/pipe/submit`);
         let socket;
 
-        let start = (websocketServerLocation) => {
+        let start=(websocketServerLocation)=> {
             socket = new WebSocket(websocketServerLocation);
             this.socket = socket;
             socket.onclose = (event) => {
@@ -100,48 +95,43 @@ let Root = React.createClass({
         };
     },
     render: function () {
-        //        return null;
         return (
             <Provider store={this.state.store}>            
             <div className="chat-root">
-                    <div className="header-wrap">
+                <div className="header-wrap">
                     <CommonHeader/> 
-                </div>                   
+                </div>
+                <div className="left">
+                    <LeftHeader/> 
+                </div>
+                <div className="center">
+                    <RoomList/>  
+                </div>
+                <div className="right">
+                    <div className="top">
+                        <Title/>   
+                    </div>
+
+                    <div className="left">
+                        <ChatMessage message={this.state.message[this.state.roomId]}/>
+                        <Tools/>
+                        <Input store={this.state.store}/>
+                    </div>           
+                    <div className="right">
+                        <div className="Bulletin-wrap">
+                           <Bulletin/>
+                        </div>
+                        <div className="members-wrap">
+                            <Members/>                            
+                        </div>                                          
+                    </div>                    
+                </div>                                          
             </div>  
             </Provider>
         );
     }
 });
-export default Root;
-//ReactDOM.render(
-//    <Root/>,
-//    $("#wrap")[0]
-//);
-//                <div className="header-wrap">
-//                    <CommonHeader/> 
-//                </div>
-//                <div className="left">
-//                    <LeftHeader/> 
-//                </div>
-//                <div className="center">
-//                    <RoomList/>  
-//                </div>
-//                <div className="right">
-//                    <div className="top">
-//                        <Title/>   
-//                    </div>
-//
-//                    <div className="left">
-//                        <ChatMessage message={this.state.message[this.state.roomId]}/>
-//                        <Tools/>
-//                        <Input store={this.state.store}/>
-//                    </div>           
-//                    <div className="right">
-//                        <div className="Bulletin-wrap">
-//                           <Bulletin/>
-//                        </div>
-//                        <div className="members-wrap">
-//                            <Members/>                            
-//                        </div>                                          
-//                    </div>                    
-//                </div>
+ReactDOM.render(
+    <Root/>,
+    $("#wrap")[0]
+);

@@ -55,6 +55,6 @@ let component=React.createClass({
 //        
 //    }    
 });
-component = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(component);
-return component;
+component=connect(mapStateToProps,mapDispatchToProps)(component);
+export default component;
 

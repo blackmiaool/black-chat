@@ -1,0 +1,83 @@
+@import "bootstrap/forms.less";
+@import "bootstrap/input-groups.less";
+@import "bootstrap/buttons.less";
+@import "bootstrap/button-groups.less";
+@import "bootstrap/variables.less";
+@import "bootstrap/mixins.less";
+@import "bootstrap/alerts.less";
+@import "bootstrap/glyphicons.less";
+@import "bootstrap/dropdowns.less";
+@import "mixin.less";
+html{
+    font-family: punctuation, "PingFangSC-Regular", "Microsoft Yahei", "sans-serif";
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#wrap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    //    min-height: 400px
+}
+
+* {
+    box-sizing: border-box;
+    
+}
+
+button {
+    .clickable;
+    .unselectable;
+}
+
+input {
+    height: 30px;
+    border-radius: 3px;
+    border: 1px solid #aaa;
+}
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px solid;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    vertical-align: middle;
+    margin: 0px;
+}
+.clickable {
+    .clickable;
+}
+.unselectable {
+    .unselectable;
+}
+.fill {
+   .fill;
+}
+
+.abs-fill {
+    .abs-fill;
+}
+.trans {
+    .trans();
+}
+.hide {
+ .hide();
+}
+.round{
+ .round();
+}
+*[data-show="1"] {}
+
+*[data-show="0"] {
+    .hide;
+}

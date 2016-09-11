@@ -1,3 +1,10 @@
+import common from "../../../client/common.js"
+import React from "react";
+import {Provider,connect} from 'react-redux';
+import * as Redux from 'redux';
+import _ from "underscore";
+
+var css = require("./Members.less");
 const mapStateToProps = (state) => {
     return {
         members: state.currentRoom.members||{},
@@ -64,5 +71,5 @@ let component = React.createClass({
     //        
     //    }    
 });
-component = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(component);
-return component;
+component=connect(mapStateToProps,mapDispatchToProps)(component);
+export default component;

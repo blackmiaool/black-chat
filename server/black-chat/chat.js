@@ -13,7 +13,7 @@ let rooms = info.rooms;
 //let rooms = io.readFileJsonSyncForce(roomFileName, initRoom);
 //console.log(rooms)
 let Chat = {}
-Chat.init = function (server) {
+Chat.init = function(server) {
     let WebSocket = require("ws")
 
     var WebSocketServer = require("ws").Server;
@@ -24,24 +24,32 @@ Chat.init = function (server) {
     });
 
 
-    wsserver.on('connection', function (ws) {
-        if (!ws.upgradeReq.headers.cookie)
-            return;
-        var cookiesRaw = cookie.parse(ws.upgradeReq.headers.cookie);
-        //        console.log(cookiesRaw);
-        let cookies = {};
-        for (var i in cookiesRaw) {
-            let cookie = cookieParser.signedCookie(cookiesRaw[i], "m5345sdpymvkffglgmkg3453453453453453yeygh34gfwsrfgdvbllllhygmvyug");
-            if (cookie != cookiesRaw[i])
-                cookies[i] = cookie;
-        }
+    wsserver.on('connection', function(ws) {
+        let usr;
+        if (!ws.upgradeReq.headers.cookie) {
+            usr={
+                name:"guest"+parseInt(Math.random()*1000),
+            }
+            
+        } else {
+            var cookiesRaw = cookie.parse(ws.upgradeReq.headers.cookie);
+            //        console.log(cookiesRaw);
+            let cookies = {};
+            for (var i in cookiesRaw) {
+                let cookie = cookieParser.signedCookie(cookiesRaw[i], "m5345sdpymvkffglgmkg3453453453453453yeygh34gfwsrfgdvbllllhygmvyug");
+                if (cookie != cookiesRaw[i])
+                    cookies[i] = cookie;
+            }
 
-        let usr = account.check(cookies.userName, cookies.token);
-        usr.ws = ws;
-        if (!cookies.userName || !cookies.token || !usr) {
-            ws.close();
-            return;
+            usr = account.check(cookies.userName, cookies.token);            
+            if (!cookies.userName || !cookies.token || !usr) {
+                ws.close();
+                return;
+            }
         }
+        usr.ws = ws;
+
+
         let userRooms = info.getUserRooms(usr.name);
 
         for (let j in userRooms) {
@@ -73,16 +81,22 @@ Chat.init = function (server) {
         ws.on('close', function close() {
             onUsrLeave();
         });
-        ws.on('message', function (message) {
-            //            console.log('received: %s', message);
+        ws.on('message', function(message) {
+            console.log('received: %s', message);            
             message = JSON.parse(message);
+            if(message.room===undefined){
+                console.warn("no room");
+                return ;
+            }
             let roomId = message.room;
             let content = message.content;
             let room = info.rooms[roomId];
             for (var i in room.members) {
                 let ws = room.members[i].ws;
                 if (ws.readyState == WebSocket.OPEN) {
-                    ws.send(JSON.stringify({content,room:roomId,user:usr.name}));
+                    ws.send(JSON.stringify({
+                        content, room: roomId, user: usr.name
+                    }));
                 }
             }
         });

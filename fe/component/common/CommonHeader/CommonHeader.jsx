@@ -32,9 +32,8 @@ let component = React.createClass({
         return {};
     },
     render: function () {
-        console.log(3334333)
         return (
-            <div className="common-CommonHeader-component component">
+            <div data-component="common-commonHeader" className="component">
                     <div className="center page-max-width">
                         <a className="icon" href={window.location.origin}><img  src="/icon.png"/></a> 
                         {(()=>{if(common.args.page!="chat"){

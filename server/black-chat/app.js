@@ -57,7 +57,7 @@ app.post('/pipe/getRoom', function (req, res) {
         console.log(v.__proto__)
         return v.profile;
     })
-
+    res.set("Access-Control-Allow-Origin", "*")
     //    let result=info.getUserRooms().map(function(v,i){
     //        return v.profile;
     //    });

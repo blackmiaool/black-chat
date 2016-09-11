@@ -1,3 +1,9 @@
+import common from "../../../client/common.js"
+import React from "react";
+import {Provider,connect} from 'react-redux';
+import * as Redux from 'redux';
+
+var css = require("./Bulletin.less");
 const mapStateToProps = (state) => {
     return {
         content:state.currentRoom.bulletin
@@ -51,5 +57,5 @@ let component = React.createClass({
 //        
 //    }    
 });
-component=ReactRedux.connect(mapStateToProps,mapDispatchToProps)(component);
-return component;
+component=connect(mapStateToProps,mapDispatchToProps)(component);
+export default component;

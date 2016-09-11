@@ -1,10 +1,29 @@
-let Provider = ReactRedux.Provider;
+import common from "../../client/common.js"
+import React from "react";
+import {
+    Provider
+}
+from 'react-redux';
+import * as Redux from 'redux';
+import _ from 'underscore';
+import CommonHeader from "../common/CommonHeader/CommonHeader";
+import LeftHeader from "../chat/LeftHeader/LeftHeader";
+import RoomList from "../chat/RoomList/RoomList";
+import Title from "../chat/Title/Title";
+import ChatMessage from "../chat/ChatMessage/ChatMessage";
+import Tools from "../chat/Tools/Tools";
+import Input from "../chat/Input/Input";
+import Bulletin from "../chat/Bulletin/Bulletin";
+import Members from "../chat/Members/Members";
+import rootConfig from "../config.js"
+
+let css = require("./chat.less");
 let Root = React.createClass({
     connectInit: function () {
         //        this.socket = new WebSocket(`ws://${location.host}/pipe/submit`);
         let socket;
 
-        let start=(websocketServerLocation)=> {
+        let start = (websocketServerLocation) => {
             socket = new WebSocket(websocketServerLocation);
             this.socket = socket;
             socket.onclose = (event) => {
@@ -24,6 +43,7 @@ let Root = React.createClass({
                 });
             };
             socket.onmessage = (event) => {
+                
                 if (!event.data)
                     return;
                 this.state.store.dispatch({
@@ -32,11 +52,12 @@ let Root = React.createClass({
                 });
             };
         }
-        start(`ws://${location.host}/pipe/submit`);
+        start(rootConfig.wsLocation);
 
     },
 
     getInitialState: function () {
+        
         let rootStore = (state = {
             current: "recent",
             currentRoom: {},
@@ -55,24 +76,29 @@ let Root = React.createClass({
                     current: action.name
                 })
                 break;
-            case "setRoom":
-                //                console.log(action.room)
-                this.state.roomId = action.room.uid;
-                //                console.log("roomId",this.state.roomId)
-                this.setState(this.state)
+            case "setRoom":    
+                    console.log(action.room.uid)
+                this.setState({
+                    roomId:action.room.uid
+                })
+                console.log(this.state.roomId,"roomid");
                 return Object.assign({}, state, {
-                    currentRoom: action.room
+                    currentRoom: action.room,
+                    roomId:action.room.uid
                 })
                 break;
-            case "sendMessage":
-                console.log(action)
-
+            case "sendMessage":  
+                    console.log("uid",state.currentRoom.uid)
                 this.socket.send(JSON.stringify({
                     content: action.text,
                     room: state.currentRoom.uid
                 }));
                 break;
             case "receiveMessage":
+                    
+                if(this.state.message[action.data.room]===undefined){
+                    this.state.message[action.data.room]=[];
+                }
                 this.state.message[action.data.room].push({
                     text: action.data.content,
                     user: state.currentRoom.members[action.data.user]
@@ -80,6 +106,7 @@ let Root = React.createClass({
                 this.setState({
                     message: this.state.message
                 })
+                
                 return state;
             }
             return state;
@@ -95,23 +122,23 @@ let Root = React.createClass({
         };
     },
     render: function () {
+        //        return null;
         return (
             <Provider store={this.state.store}>            
             <div className="chat-root">
                 <div className="header-wrap">
                     <CommonHeader/> 
-                </div>
+                </div>   
                 <div className="left">
                     <LeftHeader/> 
-                </div>
+                </div>      
                 <div className="center">
                     <RoomList/>  
                 </div>
                 <div className="right">
                     <div className="top">
                         <Title/>   
-                    </div>
-
+                    </div> 
                     <div className="left">
                         <ChatMessage message={this.state.message[this.state.roomId]}/>
                         <Tools/>
@@ -123,15 +150,14 @@ let Root = React.createClass({
                         </div>
                         <div className="members-wrap">
                             <Members/>                            
-                        </div>                                          
-                    </div>                    
-                </div>                                          
+                        </div>                                        
+                    </div>           
+                </div>
             </div>  
             </Provider>
         );
     }
 });
-ReactDOM.render(
-    <Root/>,
-    $("#wrap")[0]
-);
+export default Root;
+                    
+//                </div>

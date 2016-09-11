@@ -1,4 +1,9 @@
-let Provider=ReactRedux.Provider;
+import common from "../../../client/common.js"
+import React from "react";
+import {Provider,connect} from 'react-redux';
+import * as Redux from 'redux';
+import $ from "jquery"
+var css = require("./Title.less");
 const mapStateToProps = (state) => {
     return {
         title:state.currentRoom.name,
@@ -53,6 +58,6 @@ let component=React.createClass({
 //        
 //    }    
 });
-component = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(component);
-return component;
+component = connect(mapStateToProps, mapDispatchToProps)(component);
+export default component;
 

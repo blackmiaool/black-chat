@@ -1,13 +1,16 @@
-@main-header-height: 60px;
-@main-header-border: 1px solid #ccc;
+@import "../../less/variables.less";
+@import "../../less/common.less";
+@import "variables.less";
 .chat-root {
     .abs-fill;
     @left-width: 50px;
     @center-width: 180px;
     @top-header-height: 50px * 0.8;
+    
     >.header-wrap {
         height: @top-header-height/0.8;
-        zoom: 0.8;
+//  
+        zoom:0.8;
         border-bottom: 1px #aaa solid;
         background-color: #efefef;
     }
